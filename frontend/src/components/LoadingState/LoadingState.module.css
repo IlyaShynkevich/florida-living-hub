@@ -1,0 +1,13 @@
+.wrapper { display: flex; flex-direction: column; align-items: center; gap: 1rem; padding: 4rem 2rem; }
+
+.spinner {
+  width: 44px; height: 44px;
+  border: 4px solid var(--blue-light);
+  border-top-color: var(--blue);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.message { color: var(--text-mid); font-size: 0.95rem; }

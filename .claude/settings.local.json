@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(head *)",
+      "Skill(update-config)",
+      "PowerShell(\\(Get-ChildItem \"C:\\\\Users\\\\grenu\\\\.claude\\\\skills\" | Where-Object { Test-Path \\(Join-Path $_.FullName \"SKILL.md\"\\) }\\).Count)",
+      "PowerShell(Out-Null *)",
+      "PowerShell(Get-Process *)",
+      "Bash(git add *)"
+    ]
+  }
+}

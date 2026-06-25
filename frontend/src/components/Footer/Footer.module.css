@@ -1,0 +1,13 @@
+.footer {
+  background: var(--blue-dark);
+  color: rgba(255,255,255,0.7);
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.inner { display: flex; flex-direction: column; gap: 0.4rem; align-items: center; }
+
+.brand { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+
+.copy { font-size: 0.85rem; }
