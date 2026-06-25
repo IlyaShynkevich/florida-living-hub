@@ -11,3 +11,7 @@
 .brand { font-size: 1.1rem; font-weight: 700; color: var(--white); }
 
 .copy { font-size: 0.85rem; }
+
+@media (max-width: 660px) {
+  .footer { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+}

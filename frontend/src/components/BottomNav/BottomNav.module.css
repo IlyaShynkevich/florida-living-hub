@@ -1,0 +1,63 @@
+/* Hidden on desktop */
+.bar { display: none; }
+
+@media (max-width: 660px) {
+  .bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: var(--white);
+    border-top: 1px solid var(--sand-dark);
+    box-shadow: 0 -2px 16px rgba(13, 59, 110, 0.10);
+    /* Safe area for iPhone home indicator */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 8px 4px 10px;
+    color: var(--text-light);
+    transition: color 0.15s;
+    min-width: 0;
+    position: relative;
+  }
+
+  .tab::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20%;
+    right: 20%;
+    height: 2.5px;
+    background: var(--blue);
+    border-radius: 0 0 3px 3px;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .tab.active { color: var(--blue-dark); }
+  .tab.active::before { opacity: 1; }
+
+  .icon {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  .label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+}

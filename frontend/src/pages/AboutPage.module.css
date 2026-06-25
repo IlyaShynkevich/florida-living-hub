@@ -29,3 +29,7 @@
 .section ul li::before { content: '—'; position: absolute; left: 0; color: var(--blue); }
 
 .futureList li::before { content: ''; position: static; }
+
+@media (max-width: 660px) {
+  .page { padding: 1.5rem 1rem; }
+}
