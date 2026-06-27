@@ -2,10 +2,11 @@ import { NavLink } from 'react-router-dom'
 import styles from './BottomNav.module.css'
 
 const tabs = [
-  { to: '/',           end: true,  icon: '🏠', label: 'Home' },
-  { to: '/beaches',    end: false, icon: '🏖️', label: 'Beaches' },
-  { to: '/calculator', end: false, icon: '⚡', label: 'Calculator' },
-  { to: '/about',      end: false, icon: 'ℹ️',  label: 'About' },
+  { to: '/',             end: true,  icon: '🏠', label: 'Home' },
+  { to: '/beach-finder', end: false, icon: '🔍', label: 'Finder' },
+  { to: '/beaches',      end: false, icon: '🏖️', label: 'Conditions' },
+  { to: '/calculator',   end: false, icon: '⚡', label: 'Utility' },
+  { to: '/about',        end: false, icon: 'ℹ️',  label: 'About' },
 ]
 
 export default function BottomNav() {
