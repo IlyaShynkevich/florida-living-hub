@@ -5,14 +5,14 @@ import styles from './BeachDetails.module.css'
 
 function getRecommendedAction(beach) {
   if (beach.status === 'Not Recommended') {
-    if (beach.ripCurrentRisk === 'High') return 'Avoid swimming due to rip current risk.'
-    if (beach.redTideStatus === 'High') return 'Avoid the beach due to red tide conditions.'
-    return 'Check local warnings before going.'
+    if (beach.ripCurrentRisk === 'High') return 'Not a good candidate for swimming today due to elevated rip current risk. Check official local warnings before visiting.'
+    if (beach.redTideStatus === 'High') return 'Not recommended due to red tide conditions. Check official local advisories before visiting.'
+    return 'Not recommended based on demo conditions. Check official local warnings before visiting.'
   }
   if (beach.status === 'Be Careful') {
-    return 'Use sunscreen, stay hydrated, and watch for warning flags.'
+    return 'Use caution. Conditions have factors worth watching. Follow posted beach flags and lifeguard instructions.'
   }
-  return 'Great beach day! Enjoy responsibly.'
+  return 'Good candidate for a beach day based on demo conditions. Always check official local warnings before swimming.'
 }
 
 export default function BeachDetails({ beach }) {
@@ -20,14 +20,14 @@ export default function BeachDetails({ beach }) {
 
   return (
     <div className={styles.wrapper}>
-      <button className={styles.back} onClick={() => navigate('/beaches')}>
-        ← Back to Beach List
+      <button className={styles.back} onClick={() => navigate(-1)}>
+        ← Back
       </button>
 
       <div className={styles.hero}>
         <div>
           <h1 className={styles.name}>{beach.name}</h1>
-          <p className={styles.city}>{beach.cityOrArea}</p>
+          <p className={styles.city}>{beach.cityOrArea} &middot; {beach.region}</p>
           <p className={styles.description}>{beach.shortDescription}</p>
         </div>
         <div className={styles.heroRight}>
@@ -36,10 +36,19 @@ export default function BeachDetails({ beach }) {
         </div>
       </div>
 
-      <div className={styles.recommendation}>
-        <span className={styles.recIcon}>💡</span>
-        {getRecommendedAction(beach)}
-      </div>
+      <section className={styles.section}>
+        <div className={styles.recHeader}>
+          <h2 className={styles.sectionTitle}>Beach Day Recommendation</h2>
+          <span className={styles.demoTag}>Demo Data</span>
+        </div>
+        <div className={styles.recommendation}>
+          <span className={styles.recIcon}>💡</span>
+          <div>
+            <p>{getRecommendedAction(beach)}</p>
+            <p className={styles.recFooter}>Check official local warnings before swimming. Follow posted beach flags and lifeguard instructions.</p>
+          </div>
+        </div>
+      </section>
 
       <div className={styles.grid}>
         <section className={styles.section}>
@@ -150,17 +159,17 @@ export default function BeachDetails({ beach }) {
         </section>
       )}
 
-      {beach.dataStatus === 'demo' && (
-        <div className={styles.demoNotice}>
-          📋 This page uses demo data. Safety conditions are illustrative — always check official local sources before swimming.
-        </div>
-      )}
-
-      <section className={`${styles.section} ${styles.placeholder}`}>
-        <h2 className={styles.sectionTitle}>Map</h2>
-        <div className={styles.placeholderBox}>
-          🗺️ Interactive map coming in a future update.
-        </div>
+      <section className={`${styles.section} ${styles.disclaimerSection}`}>
+        <h2 className={`${styles.sectionTitle} ${styles.disclaimerTitle}`}>⚠️ Safety Disclaimer</h2>
+        <p className={styles.disclaimerText}>
+          All beach condition data on this page is <strong>demo / illustrative data</strong> and is not connected to any live feed. It does not reflect current real-world conditions.
+        </p>
+        <ul className={styles.disclaimerList}>
+          <li>Always check official local sources before swimming or visiting.</li>
+          <li>Observe posted beach safety flags and follow lifeguard instructions.</li>
+          <li>Rip current and red tide data shown here may not be accurate for today.</li>
+          <li>This page does not guarantee beach safety. Use your own judgment.</li>
+        </ul>
       </section>
     </div>
   )
