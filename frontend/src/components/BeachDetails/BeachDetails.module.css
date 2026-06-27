@@ -49,6 +49,8 @@
 
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
 
+.wrapper > section { margin-bottom: 1rem; }
+
 .section {
   background: var(--white);
   border-radius: var(--radius);
@@ -70,6 +72,27 @@
 
 .detailList li:last-child { border-bottom: none; }
 .detailList strong { color: var(--text-dark); }
+
+.noteList { display: flex; flex-direction: column; }
+
+.noteItem {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--sand);
+  font-size: 0.9rem;
+}
+
+.noteItem:last-child { border-bottom: none; }
+
+.noteLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+  margin-bottom: 0.2rem;
+}
+
+.noteValue { color: var(--text-dark); line-height: 1.5; }
 
 .riskLow  { color: var(--green); }
 .riskModerate { color: var(--yellow); }
@@ -96,6 +119,43 @@
   left: 0;
   color: var(--green);
   font-weight: 700;
+}
+
+.cautionBox {
+  margin-top: 0.75rem;
+  background: #fff8e1;
+  border-left: 3px solid #f9a825;
+  border-radius: 0 6px 6px 0;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.85rem;
+  color: #5d4037;
+  line-height: 1.5;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  background: var(--blue-light);
+  color: var(--blue-dark);
+  border-radius: 50px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.demoNotice {
+  background: var(--sand);
+  border: 1px solid var(--sand-dark);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--text-mid);
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .placeholder .placeholderBox {

@@ -30,7 +30,7 @@ export default function BeachCard({ beach }) {
       <div className={styles.header}>
         <div>
           <h2 className={styles.name}>{beach.name}</h2>
-          <p className={styles.city}>{beach.city}</p>
+          <p className={styles.city}>{beach.cityOrArea}</p>
         </div>
         <StatusBadge status={beach.status} />
       </div>

@@ -3,9 +3,9 @@ import styles from './AboutPage.module.css'
 const futureFeatures = [
   '🌐 Real-time weather API integration',
   '🌀 NOAA / National Weather Service alerts',
-  '🌪️ Hurricane preparation tracker',
-  '🗺️ Interactive beach map',
-  '📖 Local guides and dining recommendations',
+  '🗺️ Interactive Gulf Coast beach map',
+  '🏄 Parking and crowd-level tips per beach',
+  '📍 East Coast and South Florida regions',
   '⭐ Save favorite beaches',
 ]
 
@@ -20,16 +20,20 @@ export default function AboutPage() {
         <section className={styles.section}>
           <h2>What Is This?</h2>
           <p>
-            Florida Living Hub is an MVP dashboard that combines useful public-style data into one
-            simple interface for people living in or visiting Florida. It gives you beach conditions,
-            safety alerts, and utility cost estimates — without digging through multiple websites.
+            Florida Living Hub is a Gulf Coast beach-day planner. It answers one question:
+            <strong> which beach should I go to today, and what should I watch out for?</strong>
+          </p>
+          <p style={{ marginTop: '0.6rem' }}>
+            We are launching first on the Gulf Coast, helping locals and visitors choose the best beach
+            based on weather, UV, red tide, rip-current risk, and practical local tips.
+            More Florida regions are coming soon.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>Current Features</h2>
+          <h2>Current Features — Gulf Coast Beta</h2>
           <ul>
-            <li>Beach conditions for 6 popular Florida beaches</li>
+            <li>Beach conditions for 6 Gulf Coast beaches</li>
             <li>Dynamic Beach Score (1–10) based on safety factors</li>
             <li>Rip current and red tide status</li>
             <li>Monthly utility cost estimator for 5 Florida cities</li>
