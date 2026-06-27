@@ -35,7 +35,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
 .demoTag {
@@ -49,26 +49,103 @@
   text-transform: uppercase;
 }
 
-.recommendation {
+.recTop {
   display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  background: var(--blue-light);
-  border-left: 4px solid var(--blue);
-  border-radius: 0 8px 8px 0;
-  padding: 0.9rem 1.1rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--blue-dark);
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1rem;
 }
 
-.recIcon { font-size: 1.1rem; flex-shrink: 0; margin-top: 0.1rem; }
+.recScoreBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 0.1rem;
+  flex-shrink: 0;
+}
+
+.recScoreNum {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.recScoreOf { font-size: 1rem; color: var(--text-light); }
+
+.scoreGo      { color: var(--green); }
+.scoreCaution { color: var(--yellow); }
+.scoreAvoid   { color: var(--red); }
+
+.recMain { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.recLabelBadge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 0.2rem 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.badgeGo      { background: var(--green-light);  color: var(--green); }
+.badgeCaution { background: var(--yellow-light); color: var(--yellow); }
+.badgeAvoid   { background: var(--red-light);    color: var(--red); }
+
+.recExplanation {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.recWarnings {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.recWarnings li {
+  font-size: 0.85rem;
+  color: #5d4037;
+  background: #fff8e1;
+  border-left: 3px solid #f9a825;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0 6px 6px 0;
+  line-height: 1.45;
+}
+
+.recPositives {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.recPositives li {
+  font-size: 0.85rem;
+  color: var(--green);
+  line-height: 1.45;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.recPositives li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+}
 
 .recFooter {
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--text-mid);
+  font-size: 0.78rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  border-top: 1px solid var(--sand-dark);
+  padding-top: 0.6rem;
+  margin-top: 0.25rem;
 }
 
 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }

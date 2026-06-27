@@ -1,22 +1,21 @@
 import { useNavigate } from 'react-router-dom'
 import StatusBadge from '../StatusBadge/StatusBadge'
 import BeachScore from '../BeachScore/BeachScore'
+import { calcBeachDayScore, deriveHeatRisk, deriveParkingDifficulty } from '../../utils/beachDayScore'
 import styles from './BeachDetails.module.css'
-
-function getRecommendedAction(beach) {
-  if (beach.status === 'Not Recommended') {
-    if (beach.ripCurrentRisk === 'High') return 'Not a good candidate for swimming today due to elevated rip current risk. Check official local warnings before visiting.'
-    if (beach.redTideStatus === 'High') return 'Not recommended due to red tide conditions. Check official local advisories before visiting.'
-    return 'Not recommended based on demo conditions. Check official local warnings before visiting.'
-  }
-  if (beach.status === 'Be Careful') {
-    return 'Use caution. Conditions have factors worth watching. Follow posted beach flags and lifeguard instructions.'
-  }
-  return 'Good candidate for a beach day based on demo conditions. Always check official local warnings before swimming.'
-}
 
 export default function BeachDetails({ beach }) {
   const navigate = useNavigate()
+
+  const rec = calcBeachDayScore({
+    uvIndex:          beach.uvIndex,
+    heatRisk:         deriveHeatRisk(beach.airTemperature),
+    ripCurrentRisk:   beach.ripCurrentRisk,
+    redTideStatus:    beach.redTideStatus,
+    weatherCondition: beach.weatherCondition,
+    windSpeed:        beach.windSpeed,
+    parkingDifficulty: deriveParkingDifficulty(beach.parkingNotes),
+  })
 
   return (
     <div className={styles.wrapper}>
@@ -41,13 +40,33 @@ export default function BeachDetails({ beach }) {
           <h2 className={styles.sectionTitle}>Beach Day Recommendation</h2>
           <span className={styles.demoTag}>Demo Data</span>
         </div>
-        <div className={styles.recommendation}>
-          <span className={styles.recIcon}>💡</span>
-          <div>
-            <p>{getRecommendedAction(beach)}</p>
-            <p className={styles.recFooter}>Check official local warnings before swimming. Follow posted beach flags and lifeguard instructions.</p>
+
+        <div className={styles.recTop}>
+          <div className={styles.recScoreBlock}>
+            <span className={`${styles.recScoreNum} ${styles[`score${rec.label}`]}`}>{rec.score}</span>
+            <span className={styles.recScoreOf}>/100</span>
+          </div>
+          <div className={styles.recMain}>
+            <span className={`${styles.recLabelBadge} ${styles[`badge${rec.label}`]}`}>{rec.label}</span>
+            <p className={styles.recExplanation}>{rec.explanation}</p>
           </div>
         </div>
+
+        {rec.warnings.length > 0 && (
+          <ul className={styles.recWarnings}>
+            {rec.warnings.map((w, i) => <li key={i}>{w}</li>)}
+          </ul>
+        )}
+
+        {rec.positives.length > 0 && (
+          <ul className={styles.recPositives}>
+            {rec.positives.map((p, i) => <li key={i}>{p}</li>)}
+          </ul>
+        )}
+
+        <p className={styles.recFooter}>
+          This is decision-support information based on demo data — not a safety guarantee. Always check official local warnings before swimming and follow posted beach flags.
+        </p>
       </section>
 
       <div className={styles.grid}>
