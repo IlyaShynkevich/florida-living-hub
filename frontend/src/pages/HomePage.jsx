@@ -39,8 +39,8 @@ export default function HomePage() {
           <p className={styles.heroDescription}>
             Florida Living Hub is launching first on the Gulf Coast, helping locals and visitors choose the best beach for today based on weather, UV, red tide, rip-current risk, parking, and practical local tips. More Florida regions coming soon.
           </p>
-          <button className={styles.ctaBtn} onClick={() => navigate('/beaches')}>
-            Check Today's Beaches
+          <button className={styles.ctaBtn} onClick={() => navigate('/beach-finder')}>
+            Find the Best Beach for Today
           </button>
         </div>
         <div className={styles.heroDecoration} aria-hidden="true">🌊</div>
