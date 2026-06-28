@@ -42,22 +42,30 @@ A Gulf Coast beach-day planner that helps locals and visitors choose the right F
 ### Prerequisites
 - Node.js 18+
 - npm
+- No `.env` files required — all data is mock JSON included in the repo
 
-### Install dependencies
+### 1. Clone the repo
+
+```bash
+git clone <repo-url>
+cd "Florida Living Hub"
+```
+
+### 2. Install dependencies
 
 ```bash
 # Backend
 cd backend
 npm install
 
-# Frontend
+# Frontend (open a new terminal or go back to root first)
 cd ../frontend
 npm install
 ```
 
-### Start the app
+### 3. Start the app
 
-Open two terminals:
+**Start backend first** — the frontend proxies `/api` calls to `localhost:3001`.
 
 ```bash
 # Terminal 1 — backend (port 3001)
