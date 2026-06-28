@@ -1,0 +1,105 @@
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  border-left: 4px solid transparent;
+  margin-bottom: 1rem;
+}
+
+/* severity border colors */
+.good          { border-left-color: var(--green); }
+.mild-caution  { border-left-color: var(--blue); }
+.caution       { border-left-color: var(--yellow); }
+.avoid         { border-left-color: var(--red); }
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+}
+
+.demoTag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: var(--sand-dark);
+  color: var(--text-mid);
+  border-radius: 4px;
+  padding: 2px 7px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.windowRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.65rem;
+}
+
+.icon { font-size: 1.25rem; flex-shrink: 0; }
+
+.window {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  line-height: 1.2;
+}
+
+/* tint window text per severity — applied via data attribute on .card */
+.card[data-severity="good"]         .window { color: var(--green); }
+.card[data-severity="mild-caution"] .window { color: var(--blue-dark); }
+.card[data-severity="caution"]      .window { color: #7b4f00; }
+.card[data-severity="avoid"]        .window { color: var(--red); }
+
+.reason {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  line-height: 1.55;
+  margin-bottom: 0.75rem;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: var(--sand);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.tipLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-light);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.tipText {
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.footer {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  border-top: 1px solid var(--sand-dark);
+  padding-top: 0.6rem;
+}
+
+@media (max-width: 640px) {
+  .window { font-size: 1.05rem; }
+}

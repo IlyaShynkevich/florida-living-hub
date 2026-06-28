@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import StatusBadge from '../StatusBadge/StatusBadge'
 import BeachScore from '../BeachScore/BeachScore'
+import BestTimeToGo from '../BestTimeToGo/BestTimeToGo'
 import { calcBeachDayScore, deriveHeatRisk, deriveParkingDifficulty } from '../../utils/beachDayScore'
 import styles from './BeachDetails.module.css'
 
@@ -68,6 +69,12 @@ export default function BeachDetails({ beach }) {
           This is decision-support information based on demo data — not a safety guarantee. Always check official local warnings before swimming and follow posted beach flags.
         </p>
       </section>
+
+      <BestTimeToGo
+        uvIndex={beach.uvIndex}
+        airTemperature={beach.airTemperature}
+        weatherCondition={beach.weatherCondition}
+      />
 
       <div className={styles.grid}>
         <section className={styles.section}>
