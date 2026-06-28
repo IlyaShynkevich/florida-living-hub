@@ -84,7 +84,9 @@ Then open **http://localhost:5173** in your browser.
 | `/calculator`     | Utility Cost Calculator |
 | `/about`          | About & Roadmap         |
 
-Desktop navbar: **Home | Beach Finder [Beta] | Utility Calculator | About | Roadmap**
+Desktop navbar (>760px): **Home | Beach Finder [Beta] | Utility Calculator | About | Roadmap**
+
+Mobile bottom nav (≤760px): **Home | Beaches | Utility | About | Roadmap**
 
 ---
 
@@ -158,6 +160,7 @@ Florida Living Hub/
         │   ├── Navbar/
         │   ├── BottomNav/
         │   ├── Footer/
+        │   ├── ScrollToTop/
         │   ├── BeachCard/
         │   ├── BeachFinderCard/
         │   ├── BeachDetails/
