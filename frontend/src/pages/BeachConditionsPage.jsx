@@ -2,6 +2,7 @@ import useFetch from '../hooks/useFetch'
 import BeachCard from '../components/BeachCard/BeachCard'
 import LoadingState from '../components/LoadingState/LoadingState'
 import ErrorState from '../components/ErrorState/ErrorState'
+import SafetyDisclaimer from '../components/SafetyDisclaimer/SafetyDisclaimer'
 import styles from './BeachConditionsPage.module.css'
 
 export default function BeachConditionsPage() {
@@ -15,6 +16,8 @@ export default function BeachConditionsPage() {
           Current conditions for {beaches ? beaches.length : 6} popular Florida beaches.
         </p>
       </div>
+
+      <SafetyDisclaimer />
 
       {loading && <LoadingState message="Loading beach conditions..." />}
       {error && <ErrorState message={`Could not load beach data: ${error}`} />}

@@ -3,6 +3,7 @@ import useFetch from '../hooks/useFetch'
 import BeachFinderCard from '../components/BeachFinderCard/BeachFinderCard'
 import LoadingState from '../components/LoadingState/LoadingState'
 import ErrorState from '../components/ErrorState/ErrorState'
+import SafetyDisclaimer from '../components/SafetyDisclaimer/SafetyDisclaimer'
 import styles from './BeachFinderPage.module.css'
 
 const REGION_GROUPS = [
@@ -61,6 +62,8 @@ export default function BeachFinderPage() {
           </button>
         ))}
       </div>
+
+      <SafetyDisclaimer />
 
       {loading && <LoadingState message="Loading beaches..." />}
       {error && <ErrorState message={`Could not load beach data: ${error}`} />}

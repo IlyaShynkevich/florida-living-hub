@@ -3,6 +3,7 @@ import useFetch from '../hooks/useFetch'
 import BeachDetails from '../components/BeachDetails/BeachDetails'
 import LoadingState from '../components/LoadingState/LoadingState'
 import ErrorState from '../components/ErrorState/ErrorState'
+import SafetyDisclaimer from '../components/SafetyDisclaimer/SafetyDisclaimer'
 import styles from './BeachDetailPage.module.css'
 
 export default function BeachDetailPage() {
@@ -11,6 +12,7 @@ export default function BeachDetailPage() {
 
   return (
     <div className={styles.page}>
+      <SafetyDisclaimer />
       {loading && <LoadingState message="Loading beach details..." />}
       {error && <ErrorState message={`Could not load beach: ${error}`} />}
       {beach && <BeachDetails beach={beach} />}

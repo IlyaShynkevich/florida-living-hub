@@ -6,7 +6,13 @@ export default function BeachFinderCard({ beach }) {
   const navigate = useNavigate()
 
   return (
-    <div className={`${styles.card} ${styles[beach.status?.replace(' ', '')] || ''}`}>
+    <div
+      className={`${styles.card} ${styles[beach.status?.replace(' ', '')] || ''}`}
+      onClick={() => navigate(`/beaches/${beach.id}`)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => e.key === 'Enter' && navigate(`/beaches/${beach.id}`)}
+    >
       <div className={styles.header}>
         <div className={styles.nameArea}>
           <h3 className={styles.name}>{beach.name}</h3>
@@ -33,13 +39,7 @@ export default function BeachFinderCard({ beach }) {
         </span>
       </div>
 
-      <button
-        className={styles.cta}
-        onClick={() => navigate(`/beaches/${beach.id}`)}
-        aria-label={`View details for ${beach.name}`}
-      >
-        View Beach →
-      </button>
+      <p className={styles.cta}>View Details →</p>
     </div>
   )
 }
