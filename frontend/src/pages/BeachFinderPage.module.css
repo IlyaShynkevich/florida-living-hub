@@ -71,6 +71,8 @@
   background: var(--blue-light);
   border-radius: 999px;
   padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .grid {
@@ -80,7 +82,12 @@
 }
 
 @media (max-width: 660px) {
-  .page { padding: 1.25rem 1rem 2.5rem; }
+  .page {
+    padding: 1.25rem 1rem 2.5rem;
+    /* belt-and-suspenders: prevent any child from expanding the page */
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 
   .betaBanner { font-size: 0.8rem; }
 
@@ -88,10 +95,31 @@
     flex-wrap: nowrap;
     overflow-x: auto;
     padding-bottom: 0.25rem;
+    min-width: 0;
+    max-width: 100%;
     /* hide scrollbar */
     scrollbar-width: none;
   }
   .filters::-webkit-scrollbar { display: none; }
 
-  .grid { grid-template-columns: 1fr; }
+  .section {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .sectionTitle {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  /*
+   * minmax(0, 1fr) instead of 1fr:
+   * `1fr` = `minmax(auto, 1fr)` — the auto floor lets the grid track expand
+   * to fit a card's min-content (e.g. a nowrap badge), pushing past the viewport.
+   * `minmax(0, 1fr)` forces the floor to 0 so the track never overflows its container.
+   */
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 100%;
+  }
 }

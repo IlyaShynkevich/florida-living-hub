@@ -9,6 +9,10 @@
   transition: box-shadow 0.2s, transform 0.2s;
   border-top: 4px solid transparent;
   cursor: pointer;
+  /* grid item must not expand the track past the container */
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -30,6 +34,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 0.75rem;
+  min-width: 0;
 }
 
 .nameArea { flex: 1; min-width: 0; }
@@ -110,4 +115,8 @@
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--blue);
+}
+
+@media (max-width: 660px) {
+  .card { padding: 1.25rem 1rem; }
 }

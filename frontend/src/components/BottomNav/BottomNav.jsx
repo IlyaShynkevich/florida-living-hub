@@ -22,6 +22,10 @@ export default function BottomNav() {
           <span className={styles.label}>{label}</span>
         </NavLink>
       ))}
+      <a href="/about#roadmap" className={styles.tab}>
+        <span className={styles.icon}>🗺️</span>
+        <span className={styles.label}>Roadmap</span>
+      </a>
     </nav>
   )
 }

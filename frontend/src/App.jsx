@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
 import BottomNav from './components/BottomNav/BottomNav'
 import Footer from './components/Footer/Footer'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import HomePage from './pages/HomePage'
 import BeachConditionsPage from './pages/BeachConditionsPage'
 import BeachDetailPage from './pages/BeachDetailPage'
@@ -12,6 +13,7 @@ import BeachFinderPage from './pages/BeachFinderPage'
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="app-wrapper">
         <Navbar />
         <main className="main-content">

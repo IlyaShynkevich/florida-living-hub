@@ -1,7 +1,7 @@
 /* Hidden on desktop */
 .bar { display: none; }
 
-@media (max-width: 660px) {
+@media (max-width: 760px) {
   .bar {
     display: flex;
     position: fixed;
@@ -60,4 +60,9 @@
     text-overflow: ellipsis;
     max-width: 100%;
   }
+}
+
+@media (max-width: 375px) {
+  .icon  { font-size: 1.2rem; }
+  .label { font-size: 0.6rem; }
 }

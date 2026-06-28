@@ -66,5 +66,8 @@
   .wrapper {
     border-radius: 8px;
     margin-bottom: 16px;
+    padding: 12px 14px;
   }
+  .text  { font-size: 0.82rem; }
+  .statusText { font-size: 0.75rem; }
 }

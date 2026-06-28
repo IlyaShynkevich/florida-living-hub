@@ -101,5 +101,7 @@
 }
 
 @media (max-width: 640px) {
-  .window { font-size: 1.05rem; }
+  .window      { font-size: 1.05rem; }
+  .tip         { flex-direction: column; gap: 0.25rem; }
+  .tipLabel    { margin-top: 0; }
 }

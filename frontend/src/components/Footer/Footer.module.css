@@ -30,7 +30,7 @@
 
 .copy { font-size: 0.82rem; }
 
-@media (max-width: 660px) {
+@media (max-width: 760px) {
   .footer { padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
   .links { gap: 0.85rem; }
 }
