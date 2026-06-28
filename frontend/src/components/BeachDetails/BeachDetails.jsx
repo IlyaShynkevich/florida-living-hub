@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import StatusBadge from '../StatusBadge/StatusBadge'
 import BeachScore from '../BeachScore/BeachScore'
 import BestTimeToGo from '../BestTimeToGo/BestTimeToGo'
+import NearbySection from '../NearbySection/NearbySection'
 import { calcBeachDayScore, deriveHeatRisk, deriveParkingDifficulty } from '../../utils/beachDayScore'
 import styles from './BeachDetails.module.css'
 
@@ -184,29 +185,10 @@ export default function BeachDetails({ beach }) {
         </section>
       )}
 
-      <div className={styles.grid}>
-        {beach.nearbyFoodIdeas && beach.nearbyFoodIdeas.length > 0 && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>🍽️ Nearby Food</h2>
-            <ul className={styles.tipsList}>
-              {beach.nearbyFoodIdeas.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-
-        {beach.nearbyActivityIdeas && beach.nearbyActivityIdeas.length > 0 && (
-          <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>🏄 Things To Do</h2>
-            <ul className={styles.tipsList}>
-              {beach.nearbyActivityIdeas.map((item, i) => (
-                <li key={i}>{item}</li>
-              ))}
-            </ul>
-          </section>
-        )}
-      </div>
+      <NearbySection
+        foodIdeas={beach.nearbyFoodIdeas}
+        activityIdeas={beach.nearbyActivityIdeas}
+      />
 
       {beach.tips && beach.tips.length > 0 && (
         <section className={styles.section}>
