@@ -29,9 +29,9 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/about" className={({ isActive }) => isActive ? styles.active : ''}>
+          <a href="/about#roadmap" className={styles.plain}>
             Roadmap
-          </NavLink>
+          </a>
         </li>
       </ul>
 

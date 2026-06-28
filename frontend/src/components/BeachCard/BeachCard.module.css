@@ -9,6 +9,7 @@
 }
 
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.card:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 
 .Good            { border-top-color: var(--green); }
 .BeCareful       { border-top-color: var(--yellow); }

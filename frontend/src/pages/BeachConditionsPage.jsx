@@ -11,9 +11,9 @@ export default function BeachConditionsPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Florida Beach Conditions</h1>
+        <h1 className={styles.title}>Gulf Coast Beach Conditions</h1>
         <p className={styles.subtitle}>
-          Current conditions for {beaches ? beaches.length : 6} popular Florida beaches.
+          Demo conditions for {beaches ? beaches.length : 17} Gulf Coast beaches. Not live data — always check official sources before visiting.
         </p>
       </div>
 

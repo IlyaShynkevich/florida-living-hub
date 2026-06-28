@@ -58,7 +58,7 @@ export default function AboutPage() {
           </ul>
         </section>
 
-        <section className={styles.section}>
+        <section className={styles.section} id="roadmap">
           <h2>Florida Living Platform — Planned</h2>
           <p style={{ marginBottom: '1rem' }}>
             After the beach planner is solid, Florida Living Hub will expand into a broader Florida resource.

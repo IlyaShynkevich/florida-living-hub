@@ -3,10 +3,10 @@ import FeatureCard from '../components/FeatureCard/FeatureCard'
 import styles from './HomePage.module.css'
 
 const features = [
-  { icon: '🏖️', title: 'Gulf Coast Beach Conditions', description: "Today's conditions for top Gulf Coast beaches — water temp, wind speed, and UV index." },
-  { icon: '🌤️', title: 'Weather & UV Index', description: 'Know the UV risk and weather forecast before you pack your sunscreen.' },
-  { icon: '⚠️', title: 'Safety Alerts', description: 'Rip current warnings and red tide status at a glance so you can swim safely.' },
-  { icon: '🏠', title: 'Utility Cost Calculator', description: 'Estimate monthly electricity, water, and internet costs for your Florida city.' },
+  { icon: '🏖️', title: 'Gulf Coast Beach Finder', description: '17 Gulf Coast beaches with conditions, scores, and local tips to help you pick the right one.', to: '/beach-finder' },
+  { icon: '🌤️', title: 'Weather & UV Info', description: 'UV index, wind speed, water temp, and weather conditions per beach — demo data, clearly labeled.', to: '/beach-finder' },
+  { icon: '⚠️', title: 'Safety Conditions', description: 'Rip current risk and red tide status per beach. Demo data — always verify with official local sources before swimming.', to: '/beach-finder' },
+  { icon: '🏠', title: 'Utility Cost Calculator', description: 'Estimate monthly electricity, water, and internet costs for Florida cities. Demo estimates only.', to: '/calculator' },
 ]
 
 const roadmapSoon = [
@@ -50,7 +50,7 @@ export default function HomePage() {
         <h2 className={styles.sectionTitle}>What You Can Do</h2>
         <div className={styles.featureGrid}>
           {features.map((f) => (
-            <FeatureCard key={f.title} icon={f.icon} title={f.title} description={f.description} />
+            <FeatureCard key={f.title} icon={f.icon} title={f.title} description={f.description} onClick={() => navigate(f.to)} />
           ))}
         </div>
       </section>

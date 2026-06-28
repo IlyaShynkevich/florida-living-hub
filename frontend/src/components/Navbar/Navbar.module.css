@@ -47,6 +47,19 @@
 .navLinks a:hover { background: rgba(255,255,255,0.12); color: var(--white); }
 .active { background: rgba(255,255,255,0.18) !important; color: var(--white) !important; font-weight: 600; }
 
+.plain {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.9rem;
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.plain:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+
 .betaBadge {
   font-size: 0.58rem;
   font-weight: 700;

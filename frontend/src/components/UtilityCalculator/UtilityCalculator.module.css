@@ -1,4 +1,4 @@
-.wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+.wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: stretch; }
 
 .form {
   background: var(--white);
