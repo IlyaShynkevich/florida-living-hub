@@ -1,12 +1,21 @@
 import styles from './AboutPage.module.css'
 
-const futureFeatures = [
-  '🌐 Real-time weather API integration',
-  '🌀 NOAA / National Weather Service alerts',
-  '🗺️ Interactive Gulf Coast beach map',
-  '🏄 Parking and crowd-level tips per beach',
-  '📍 East Coast and South Florida regions',
-  '⭐ Save favorite beaches',
+const beachSoon = [
+  'Real-time weather and NOAA data replacing demo conditions',
+  'Interactive Gulf Coast beach map with condition overlays',
+  'East Coast and South Florida beach regions',
+  'Crowd and parking condition indicators',
+  'Save favorite beaches',
+]
+
+const platformLater = [
+  { icon: '🍽️', title: 'Restaurants & Local Guides', note: 'Curated dining by area, not paid placement.' },
+  { icon: '🏨', title: 'Hotels & Vacation Rentals', note: 'Accommodation guides for Gulf Coast communities.' },
+  { icon: '📦', title: 'Moving to Florida Guides', note: 'Neighborhoods, cost of living, and what to expect.' },
+  { icon: '🌀', title: 'Hurricane Preparation', note: 'Checklists, supply lists, and evacuation zone basics.' },
+  { icon: '🏡', title: 'Flood Zone & Insurance Basics', note: 'Understanding flood maps and what to ask before buying.' },
+  { icon: '✅', title: 'New Resident Checklist', note: 'License, registration, utilities, and Florida admin in one place.' },
+  { icon: '🔧', title: 'Local Service Providers', note: 'Vetted contractor and service recommendations by region.' },
 ]
 
 export default function AboutPage() {
@@ -26,33 +35,57 @@ export default function AboutPage() {
           <p style={{ marginTop: '0.6rem' }}>
             We are launching first on the Gulf Coast, helping locals and visitors choose the best beach
             based on weather, UV, red tide, rip-current risk, and practical local tips.
-            More Florida regions are coming soon.
+            The longer-term goal is a full Florida living resource — for visitors, new residents, and locals.
           </p>
         </section>
 
         <section className={styles.section}>
           <h2>Current Features — Gulf Coast Beta</h2>
           <ul>
-            <li>Beach conditions for 6 Gulf Coast beaches</li>
-            <li>Dynamic Beach Score (1–10) based on safety factors</li>
-            <li>Rip current and red tide status</li>
-            <li>Monthly utility cost estimator for 5 Florida cities</li>
+            <li>Beach conditions for 17 Gulf Coast beaches</li>
+            <li>Beach Day Score based on UV, rip current, red tide, wind, and heat</li>
+            <li>Best Time To Go guidance per beach</li>
+            <li>Parking difficulty and access notes per beach</li>
+            <li>Monthly utility cost estimator for Florida cities</li>
           </ul>
         </section>
 
         <section className={styles.section}>
-          <h2>Coming Soon</h2>
-          <ul className={styles.futureList}>
-            {futureFeatures.map((f) => <li key={f}>{f}</li>)}
+          <h2>Beach Planner — Coming Soon</h2>
+          <p style={{ marginBottom: '0.75rem' }}>Near-term improvements to the beach planning features:</p>
+          <ul>
+            {beachSoon.map((f) => <li key={f}>{f}</li>)}
           </ul>
+        </section>
+
+        <section className={styles.section}>
+          <h2>Florida Living Platform — Planned</h2>
+          <p style={{ marginBottom: '1rem' }}>
+            After the beach planner is solid, Florida Living Hub will expand into a broader Florida resource.
+            These sections are <strong>not built yet</strong> — they are planned for future phases.
+          </p>
+          <div className={styles.platformGrid}>
+            {platformLater.map((item) => (
+              <div key={item.title} className={styles.platformCard}>
+                <span className={styles.platformIcon}>{item.icon}</span>
+                <div className={styles.platformBody}>
+                  <div className={styles.platformHeader}>
+                    <div className={styles.platformTitle}>{item.title}</div>
+                    <span className={styles.plannedTag}>Planned</span>
+                  </div>
+                  <div className={styles.platformNote}>{item.note}</div>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className={styles.section}>
           <h2>Data Notice</h2>
           <p>
-            This MVP uses mock data for demonstration purposes. All beach conditions and utility
-            estimates are illustrative and should not be used for safety decisions. Always check
-            official sources before swimming.
+            This MVP uses demo data for illustration purposes. All beach conditions and utility
+            estimates are not live and should not be used for safety decisions. Always check
+            official local sources and posted beach flags before swimming.
           </p>
         </section>
       </div>

@@ -28,7 +28,57 @@
 
 .section ul li::before { content: '—'; position: absolute; left: 0; color: var(--blue); }
 
-.futureList li::before { content: ''; position: static; }
+.platformGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.platformCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  background: var(--sand);
+  border-radius: 8px;
+}
+
+.platformIcon { font-size: 1.15rem; flex-shrink: 0; margin-top: 2px; }
+
+.platformBody { flex: 1; min-width: 0; }
+
+.platformHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+  flex-wrap: wrap;
+}
+
+.platformTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.platformNote {
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  line-height: 1.4;
+}
+
+.plannedTag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--sand-dark);
+  color: var(--text-light);
+  border-radius: 4px;
+  padding: 2px 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
 
 @media (max-width: 660px) {
   .page { padding: 1.5rem 1rem; }
