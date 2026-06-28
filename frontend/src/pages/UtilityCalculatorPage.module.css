@@ -16,6 +16,28 @@
   line-height: 1.5;
 }
 
+.context {
+  margin-top: 2rem;
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
+  border-left: 4px solid var(--blue);
+}
+
+.contextTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--blue-dark);
+  margin-bottom: 0.5rem;
+}
+
+.contextText {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+
 @media (max-width: 660px) {
   .page { padding: 1.5rem 1rem; }
 }

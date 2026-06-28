@@ -24,6 +24,11 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/calculator" className={({ isActive }) => isActive ? styles.active : ''}>
+            Utility Calculator
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/about" className={({ isActive }) => isActive ? styles.active : ''}>
             About
           </NavLink>
