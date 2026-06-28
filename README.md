@@ -1,24 +1,41 @@
 # Florida Living Hub
 
-A web platform that helps residents, tourists, and newcomers in Florida quickly check beach conditions, weather, local safety alerts, and basic living cost estimates.
+A Gulf Coast beach-day planner that helps locals and visitors choose the right Florida beach based on conditions, safety factors, UV, parking, and practical local tips. Also includes an early utility cost estimator for people exploring Florida living costs.
+
+> **Gulf Coast Beta** — currently covering 17 Gulf Coast beaches across Sarasota, Manatee, Charlotte, Lee, Collier, and Pinellas counties.
+
+---
 
 ## Features
 
-- Beach conditions for 6 popular Florida beaches (Siesta Key, Clearwater, Miami Beach, Daytona, Fort Lauderdale, Cocoa Beach)
-- Dynamic Beach Score (1–10) calculated from UV index, wind, rip current risk, and red tide status
-- Safety status per beach: Good / Be Careful / Not Recommended
-- Individual beach detail pages with recommended actions and local tips
-- Monthly utility cost estimator for Tampa, Miami, Orlando, Sarasota, and Jacksonville
+### Beach Planner
+- **Beach Finder** — browse 17 Gulf Coast beaches grouped by region with filters
+- **Beach Conditions** — per-beach demo conditions: air/water temp, wind speed, UV index, rip current risk, red tide status
+- **Beach Day Score** — 0–100 score calculated from safety and comfort factors
+- **Safety Status** — Good / Be Careful / Not Recommended per beach
+- **Best Time To Go** — recommended visit window based on UV and heat (demo logic)
+- **Parking & Access** — parking difficulty rating, arrival tip, and directions per beach
+- **Nearby Food & Activities** — curated suggestions with auto-detected icons
+- **Safety Disclaimer** — visible demo data label and official advisory reminder on all condition pages
+
+### Utility Calculator
+- Rough monthly estimate for electricity, water, and internet costs
+- Covers Tampa, Miami, Orlando, Sarasota, and Jacksonville
+- Demo estimates — not live utility rates
+
+---
 
 ## Tech Stack
 
-| Layer    | Technology              |
-|----------|-------------------------|
-| Frontend | React 18 + Vite         |
-| Routing  | React Router v6         |
-| Styling  | CSS Modules             |
-| Backend  | Node.js + Express       |
-| Data     | Mock JSON (swap-ready)  |
+| Layer    | Technology             |
+|----------|------------------------|
+| Frontend | React 18 + Vite        |
+| Routing  | React Router v6        |
+| Styling  | CSS Modules            |
+| Backend  | Node.js + Express      |
+| Data     | Mock JSON (swap-ready) |
+
+---
 
 ## Setup & Running
 
@@ -54,13 +71,30 @@ npm run dev
 
 Then open **http://localhost:5173** in your browser.
 
+---
+
+## Pages & Navigation
+
+| Route             | Page                    |
+|-------------------|-------------------------|
+| `/`               | Home                    |
+| `/beach-finder`   | Beach Finder (main)     |
+| `/beaches`        | All Beach Conditions    |
+| `/beaches/:id`    | Beach Detail            |
+| `/calculator`     | Utility Cost Calculator |
+| `/about`          | About & Roadmap         |
+
+Desktop navbar: **Home | Beach Finder [Beta] | Utility Calculator | About | Roadmap**
+
+---
+
 ## API Routes
 
-| Method | Route                    | Description               |
-|--------|--------------------------|---------------------------|
-| GET    | `/api/beaches`           | All beaches with scores   |
-| GET    | `/api/beaches/:id`       | Single beach details      |
-| POST   | `/api/utility-estimate`  | Monthly utility estimate  |
+| Method | Route                   | Description              |
+|--------|-------------------------|--------------------------|
+| GET    | `/api/beaches`          | All beaches with scores  |
+| GET    | `/api/beaches/:id`      | Single beach details     |
+| POST   | `/api/utility-estimate` | Monthly utility estimate |
 
 ### POST `/api/utility-estimate` body
 
@@ -73,6 +107,39 @@ Then open **http://localhost:5173** in your browser.
 }
 ```
 
+---
+
+## Beach Day Score Logic
+
+Score starts at 100. Deductions applied per factor:
+
+| Factor                  | Deduction |
+|-------------------------|-----------|
+| Rip Current: High       | −40       |
+| Rip Current: Moderate   | −18       |
+| Red Tide: High          | −40       |
+| Red Tide: Medium        | −22       |
+| Red Tide: Low           | −10       |
+| Weather: Stormy         | −45       |
+| Weather: Rainy          | −25       |
+| Weather: Cloudy         | −5        |
+| UV ≥ 11 (Extreme)       | −12       |
+| UV 8–10 (High)          | −6        |
+| Heat Risk: Extreme      | −18       |
+| Heat Risk: High         | −8        |
+| Wind ≥ 25 mph           | −15       |
+| Wind 20–24 mph          | −8        |
+| Wind 15–19 mph          | −4        |
+| Parking: Difficult      | −6        |
+| Parking: Moderate       | −2        |
+
+**Score ≥ 70 → Go | Score 40–69 → Caution | Score < 40 → Avoid**
+
+Heat risk is derived from air temperature (≥ 105°F Extreme, ≥ 98°F High, ≥ 90°F Moderate).
+Parking difficulty is derived from parking notes text.
+
+---
+
 ## Project Structure
 
 ```
@@ -80,55 +147,61 @@ Florida Living Hub/
 ├── backend/
 │   └── src/
 │       ├── server.js
-│       ├── data/          beaches.js, utilityRates.js
-│       ├── routes/        beaches.js, utility.js
-│       ├── middleware/    errorHandler.js
-│       └── utils/         beachScore.js
+│       ├── data/           beaches.js, utilityRates.js
+│       ├── routes/         beaches.js, utility.js
+│       ├── middleware/     errorHandler.js
+│       └── utils/          beachScore.js
 └── frontend/
     └── src/
         ├── App.jsx
-        ├── components/    Navbar, Footer, BeachCard, BeachDetails,
-        │                  StatusBadge, BeachScore, FeatureCard,
-        │                  UtilityCalculator, LoadingState, ErrorState
-        ├── pages/         Home, BeachConditions, BeachDetail,
-        │                  UtilityCalculator, About
-        ├── hooks/         useFetch.js
-        └── styles/        global.css
+        ├── components/
+        │   ├── Navbar/
+        │   ├── BottomNav/
+        │   ├── Footer/
+        │   ├── BeachCard/
+        │   ├── BeachFinderCard/
+        │   ├── BeachDetails/
+        │   ├── BeachScore/
+        │   ├── StatusBadge/
+        │   ├── SafetyDisclaimer/
+        │   ├── BestTimeToGo/
+        │   ├── NearbySection/
+        │   ├── FeatureCard/
+        │   ├── UtilityCalculator/
+        │   ├── LoadingState/
+        │   └── ErrorState/
+        ├── pages/
+        │   ├── HomePage
+        │   ├── BeachFinderPage
+        │   ├── BeachConditionsPage
+        │   ├── BeachDetailPage
+        │   ├── UtilityCalculatorPage
+        │   └── AboutPage
+        ├── hooks/          useFetch.js
+        ├── utils/          beachDayScore.js, bestTimeToGo.js
+        └── styles/         global.css
 ```
 
-## Beach Score Logic
+---
 
-Starts at 10, deductions applied:
+## Data Notice
 
-| Factor               | Deduction          |
-|----------------------|--------------------|
-| UV ≥ 11              | −2                 |
-| UV 8–10              | −1                 |
-| Wind ≥ 20 mph        | −2                 |
-| Wind 15–19 mph       | −1                 |
-| Rip Current: High    | −3                 |
-| Rip Current: Moderate| −1.5               |
-| Red Tide: High       | −3                 |
-| Red Tide: Medium     | −2                 |
-| Red Tide: Low        | −1                 |
-| Air temp 78–88°F     | +0.5               |
+All beach condition data and utility estimates are **demo/mock data** for MVP demonstration purposes only. No live APIs are connected. Do not use for real safety decisions — always check official local sources and posted beach flags before swimming.
 
-Score ≥ 7 → **Good** | Score 4–6.9 → **Be Careful** | Score < 4 → **Not Recommended**
+---
 
-## Future Improvements
+## Roadmap
 
-- Real-time weather API (OpenWeatherMap / NWS)
-- NOAA red tide and rip current feeds
-- Hurricane preparation tracker
-- Interactive beach map
-- User accounts with saved favorite beaches
-- Local dining and activity guides
-- Push notifications for safety alerts
+### Beach Planner — Coming Soon
+- Live weather and NOAA data replacing demo conditions
+- Interactive Gulf Coast beach map
+- East Coast and South Florida regions
+- Crowd and parking condition indicators
 
-## Screenshots
-
-_Add screenshots here after running the app._
-
-## Notes
-
-All beach condition data and utility estimates are mock data for MVP demonstration purposes only. Do not use for real safety decisions.
+### Florida Living Platform — Planned Later
+- Restaurants and local guides
+- Hotels and vacation rentals
+- Moving to Florida guides
+- Hurricane preparation checklist
+- Flood zone and insurance basics
+- New resident checklist
