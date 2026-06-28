@@ -8,6 +8,20 @@ import styles from './BeachDetails.module.css'
 export default function BeachDetails({ beach }) {
   const navigate = useNavigate()
 
+  const parkingDifficulty = deriveParkingDifficulty(beach.parkingNotes)
+
+  const arrivalTip =
+    parkingDifficulty === 'Difficult'
+      ? 'Parking fills early, especially on weekends and holidays. Arriving before mid-morning is strongly recommended. Consider rideshare or local transit if available.'
+      : parkingDifficulty === 'Moderate'
+      ? 'Parking can fill on busy weekends and holidays. Arriving before mid-morning is a good idea.'
+      : 'Parking is generally easier here than at busier beaches, though arriving earlier always gives more options.'
+
+  const difficultyStyle =
+    parkingDifficulty === 'Difficult' ? 'riskHigh'
+    : parkingDifficulty === 'Moderate' ? 'riskModerate'
+    : 'riskLow'
+
   const rec = calcBeachDayScore({
     uvIndex:          beach.uvIndex,
     heatRisk:         deriveHeatRisk(beach.airTemperature),
@@ -122,19 +136,39 @@ export default function BeachDetails({ beach }) {
             <li><span>Restrooms</span><strong>{beach.restroomAvailability ? '✅ Available' : '❌ Not available'}</strong></li>
             <li><span>Showers</span><strong>{beach.showersAvailability ? '✅ Available' : '❌ Not available'}</strong></li>
           </ul>
+          {beach.dogRules && (
+            <ul className={styles.noteList} style={{ marginTop: '0.75rem' }}>
+              <li className={styles.noteItem}>
+                <div className={styles.noteLabel}>Dog Rules</div>
+                <div className={styles.noteValue}>{beach.dogRules}</div>
+              </li>
+            </ul>
+          )}
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Access & Rules</h2>
-          <ul className={styles.noteList}>
+          <h2 className={styles.sectionTitle}>Parking & Access</h2>
+          <ul className={styles.detailList}>
+            <li>
+              <span>Parking difficulty</span>
+              <strong className={styles[difficultyStyle]}>{parkingDifficulty}</strong>
+            </li>
+          </ul>
+          <ul className={styles.noteList} style={{ marginTop: '0.5rem' }}>
             <li className={styles.noteItem}>
-              <div className={styles.noteLabel}>Parking</div>
+              <div className={styles.noteLabel}>Parking notes</div>
               <div className={styles.noteValue}>{beach.parkingNotes ?? '—'}</div>
             </li>
             <li className={styles.noteItem}>
-              <div className={styles.noteLabel}>Dog Rules</div>
-              <div className={styles.noteValue}>{beach.dogRules ?? '—'}</div>
+              <div className={styles.noteLabel}>Arrival tip</div>
+              <div className={styles.noteValue}>{arrivalTip}</div>
             </li>
+            {beach.accessNotes && (
+              <li className={styles.noteItem}>
+                <div className={styles.noteLabel}>Getting there</div>
+                <div className={styles.noteValue}>{beach.accessNotes}</div>
+              </li>
+            )}
           </ul>
         </section>
       </div>
