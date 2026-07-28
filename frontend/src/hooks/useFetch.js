@@ -6,7 +6,10 @@ export default function useFetch(url) {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    if (!url) return
+    if (!url) {
+      setLoading(false)
+      return
+    }
     let cancelled = false
     setLoading(true)
     setError(null)

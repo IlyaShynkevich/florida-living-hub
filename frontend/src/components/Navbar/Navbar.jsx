@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import styles from './Navbar.module.css'
 
 export default function Navbar() {
@@ -34,9 +34,9 @@ export default function Navbar() {
           </NavLink>
         </li>
         <li>
-          <a href="/about#roadmap" className={styles.plain}>
+          <Link to="/about#roadmap" className={styles.plain}>
             Roadmap
-          </a>
+          </Link>
         </li>
       </ul>
 
