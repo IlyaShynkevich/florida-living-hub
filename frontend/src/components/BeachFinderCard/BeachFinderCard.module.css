@@ -25,9 +25,9 @@
   outline-offset: 2px;
 }
 
-.Good           { border-top-color: var(--green); }
-.BeCareful      { border-top-color: var(--yellow); }
-.NotRecommended { border-top-color: var(--red); }
+.Go       { border-top-color: var(--green); }
+.Caution  { border-top-color: var(--yellow); }
+.Avoid    { border-top-color: var(--red); }
 
 .header {
   display: flex;

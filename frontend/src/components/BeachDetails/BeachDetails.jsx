@@ -3,13 +3,12 @@ import StatusBadge from '../StatusBadge/StatusBadge'
 import BeachScore from '../BeachScore/BeachScore'
 import BestTimeToGo from '../BestTimeToGo/BestTimeToGo'
 import NearbySection from '../NearbySection/NearbySection'
-import { calcBeachDayScore, deriveHeatRisk, deriveParkingDifficulty } from '../../utils/beachDayScore'
 import styles from './BeachDetails.module.css'
 
 export default function BeachDetails({ beach }) {
   const navigate = useNavigate()
 
-  const parkingDifficulty = deriveParkingDifficulty(beach.parkingNotes)
+  const parkingDifficulty = beach.parkingDifficulty
 
   const arrivalTip =
     parkingDifficulty === 'Difficult'
@@ -23,15 +22,7 @@ export default function BeachDetails({ beach }) {
     : parkingDifficulty === 'Moderate' ? 'riskModerate'
     : 'riskLow'
 
-  const rec = calcBeachDayScore({
-    uvIndex:          beach.uvIndex,
-    heatRisk:         deriveHeatRisk(beach.airTemperature),
-    ripCurrentRisk:   beach.ripCurrentRisk,
-    redTideStatus:    beach.redTideStatus,
-    weatherCondition: beach.weatherCondition,
-    windSpeed:        beach.windSpeed,
-    parkingDifficulty: deriveParkingDifficulty(beach.parkingNotes),
-  })
+  const rec = beach.recommendation
 
   return (
     <div className={styles.wrapper}>

@@ -1,11 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const beaches = require("../data/beaches");
-const { calculateBeachScore, calculateStatus } = require("../utils/beachScore");
+const { calculateBeachScore } = require("../utils/beachScore");
 
 function enrichBeach(beach) {
-  const score = calculateBeachScore(beach);
-  return { ...beach, beachScore: score, status: calculateStatus(score) };
+  const { score, label, explanation, warnings, positives, parkingDifficulty } = calculateBeachScore(beach);
+  return {
+    ...beach,
+    beachScore: score,
+    status: label,
+    parkingDifficulty,
+    recommendation: { score, label, explanation, warnings, positives },
+  };
 }
 
 // GET /api/beaches
