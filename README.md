@@ -12,7 +12,7 @@ A Gulf Coast beach-day planner that helps locals and visitors choose the right F
 - **Beach Finder** — browse 17 Gulf Coast beaches grouped by region with filters
 - **Beach Conditions** — per-beach demo conditions: air/water temp, wind speed, UV index, rip current risk, red tide status
 - **Beach Day Score** — 0–100 score calculated from safety and comfort factors
-- **Safety Status** — Good / Be Careful / Not Recommended per beach
+- **Safety Status** — Go / Caution / Avoid per beach, derived from the same score
 - **Best Time To Go** — recommended visit window based on UV and heat (demo logic)
 - **Parking & Access** — parking difficulty rating, arrival tip, and directions per beach
 - **Nearby Food & Activities** — curated suggestions with auto-detected icons
@@ -189,7 +189,7 @@ Florida Living Hub/
         │   ├── UtilityCalculatorPage
         │   └── AboutPage
         ├── hooks/          useFetch.js
-        ├── utils/          beachDayScore.js, bestTimeToGo.js
+        ├── utils/          bestTimeToGo.js
         └── styles/         global.css
 ```
 

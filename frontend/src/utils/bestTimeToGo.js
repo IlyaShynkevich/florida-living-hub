@@ -1,4 +1,14 @@
-import { deriveHeatRisk } from './beachDayScore'
+/**
+ * Derives a heat risk level from air temperature.
+ * Florida-calibrated: 90°F+ is meaningful heat for sustained beach activity.
+ */
+function deriveHeatRisk(airTemperature) {
+  if (airTemperature == null) return 'Moderate'
+  if (airTemperature >= 105) return 'Extreme'
+  if (airTemperature >= 98)  return 'High'
+  if (airTemperature >= 90)  return 'Moderate'
+  return 'Low'
+}
 
 /**
  * Decision-support only. Returns a recommended time window for a beach visit
