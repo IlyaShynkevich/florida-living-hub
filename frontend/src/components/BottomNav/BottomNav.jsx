@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import styles from './BottomNav.module.css'
 
 const tabs = [
@@ -22,10 +22,10 @@ export default function BottomNav() {
           <span className={styles.label}>{label}</span>
         </NavLink>
       ))}
-      <a href="/about#roadmap" className={styles.tab}>
+      <Link to="/about#roadmap" className={styles.tab}>
         <span className={styles.icon}>🗺️</span>
         <span className={styles.label}>Roadmap</span>
-      </a>
+      </Link>
     </nav>
   )
 }
