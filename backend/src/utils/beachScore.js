@@ -124,7 +124,7 @@ function calculateBeachScore(beach) {
     explanation = "Significant risks make this a poor candidate for a beach day. Check official local conditions before visiting.";
   }
 
-  return { score, label, explanation, warnings, positives, parkingDifficulty };
+  return { score, label, explanation, warnings, positives, parkingDifficulty, heatRisk };
 }
 
 /**

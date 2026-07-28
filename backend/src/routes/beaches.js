@@ -4,12 +4,13 @@ const beaches = require("../data/beaches");
 const { calculateBeachScore } = require("../utils/beachScore");
 
 function enrichBeach(beach) {
-  const { score, label, explanation, warnings, positives, parkingDifficulty } = calculateBeachScore(beach);
+  const { score, label, explanation, warnings, positives, parkingDifficulty, heatRisk } = calculateBeachScore(beach);
   return {
     ...beach,
     beachScore: score,
     status: label,
     parkingDifficulty,
+    heatRisk,
     recommendation: { score, label, explanation, warnings, positives },
   };
 }

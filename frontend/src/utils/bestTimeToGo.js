@@ -1,21 +1,12 @@
 /**
- * Derives a heat risk level from air temperature.
- * Florida-calibrated: 90°F+ is meaningful heat for sustained beach activity.
- */
-function deriveHeatRisk(airTemperature) {
-  if (airTemperature == null) return 'Moderate'
-  if (airTemperature >= 105) return 'Extreme'
-  if (airTemperature >= 98)  return 'High'
-  if (airTemperature >= 90)  return 'Moderate'
-  return 'Low'
-}
-
-/**
  * Decision-support only. Returns a recommended time window for a beach visit
  * based on UV, heat, and weather. Uses demo data — not live conditions.
+ * heatRisk ('Low' | 'Moderate' | 'High' | 'Extreme') comes from the beach API
+ * response, which is the single source of truth (see backend/src/utils/beachScore.js)
+ * so this stays in sync with the Beach Day Score.
  */
-export function calcBestTimeToGo({ uvIndex, airTemperature, weatherCondition }) {
-  const heatRisk = deriveHeatRisk(airTemperature)
+export function calcBestTimeToGo({ uvIndex, heatRisk, weatherCondition }) {
+  const effectiveHeatRisk = heatRisk ?? 'Moderate'
 
   if (weatherCondition === 'Stormy') {
     return {
@@ -37,8 +28,8 @@ export function calcBestTimeToGo({ uvIndex, airTemperature, weatherCondition }) 
 
   const extremeUV  = uvIndex >= 11
   const highUV     = uvIndex >= 8
-  const extremeHeat = heatRisk === 'Extreme'
-  const highHeat    = heatRisk === 'High'
+  const extremeHeat = effectiveHeatRisk === 'Extreme'
+  const highHeat    = effectiveHeatRisk === 'High'
 
   if (extremeUV || (highUV && extremeHeat)) {
     return {

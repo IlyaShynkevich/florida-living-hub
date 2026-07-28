@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { apiUrl } from '../../config/api'
 import styles from './UtilityCalculator.module.css'
 
 const CITIES = ['Tampa', 'Miami', 'Orlando', 'Sarasota', 'Jacksonville']
@@ -30,7 +31,7 @@ export default function UtilityCalculator() {
     setResult(null)
 
     try {
-      const res = await fetch('/api/utility-estimate', {
+      const res = await fetch(apiUrl('/api/utility-estimate'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...form, numberOfPeople: Number(form.numberOfPeople) }),

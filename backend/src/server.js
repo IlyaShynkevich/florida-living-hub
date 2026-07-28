@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const beachRoutes = require("./routes/beaches");
@@ -7,7 +8,15 @@ const errorHandler = require("./middleware/errorHandler");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use(cors({ origin: ["http://localhost:5173", "http://192.168.0.116:5173"] }));
+// Always allow the default local dev origin; add more (e.g. a LAN IP for
+// testing on other devices) via a comma-separated CORS_ORIGINS env var.
+const defaultOrigins = ["http://localhost:5173"];
+const extraOrigins = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+app.use(cors({ origin: [...defaultOrigins, ...extraOrigins] }));
 app.use(express.json());
 
 app.get("/", (req, res) => {
