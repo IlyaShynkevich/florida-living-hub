@@ -8,7 +8,9 @@
 
 .inner { display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }
 
-.brand { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--white); letter-spacing: -0.01em; }
+.brand { display: inline-flex; align-items: center; gap: 0.45rem; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--white); letter-spacing: -0.01em; }
+
+.brandIcon { width: 22px; height: 22px; flex-shrink: 0; display: block; }
 
 .beta { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
