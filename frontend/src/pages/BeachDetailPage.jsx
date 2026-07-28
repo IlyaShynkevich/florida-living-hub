@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import useFetch from '../hooks/useFetch'
+import { apiUrl } from '../config/api'
 import BeachDetails from '../components/BeachDetails/BeachDetails'
 import LoadingState from '../components/LoadingState/LoadingState'
 import ErrorState from '../components/ErrorState/ErrorState'
@@ -8,7 +9,7 @@ import styles from './BeachDetailPage.module.css'
 
 export default function BeachDetailPage() {
   const { id } = useParams()
-  const { data: beach, loading, error } = useFetch(`/api/beaches/${id}`)
+  const { data: beach, loading, error } = useFetch(apiUrl(`/api/beaches/${id}`))
 
   return (
     <div className={styles.page}>

@@ -78,7 +78,7 @@ export default function BeachDetails({ beach }) {
 
       <BestTimeToGo
         uvIndex={beach.uvIndex}
-        airTemperature={beach.airTemperature}
+        heatRisk={beach.heatRisk}
         weatherCondition={beach.weatherCondition}
       />
 

@@ -3,8 +3,8 @@ import styles from './BestTimeToGo.module.css'
 
 const ICON = { good: '🌅', 'mild-caution': '🕐', caution: '⚠️', avoid: '⛔' }
 
-export default function BestTimeToGo({ uvIndex, airTemperature, weatherCondition }) {
-  const result = calcBestTimeToGo({ uvIndex, airTemperature, weatherCondition })
+export default function BestTimeToGo({ uvIndex, heatRisk, weatherCondition }) {
+  const result = calcBestTimeToGo({ uvIndex, heatRisk, weatherCondition })
 
   return (
     <section className={`${styles.card} ${styles[result.severity]}`} data-severity={result.severity}>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useFetch from '../hooks/useFetch'
+import { apiUrl } from '../config/api'
 import BeachFlipCard from '../components/BeachFlipCard/BeachFlipCard'
 import LoadingState from '../components/LoadingState/LoadingState'
 import ErrorState from '../components/ErrorState/ErrorState'
@@ -22,7 +23,7 @@ function getGroup(beach) {
 }
 
 export default function BeachFinderPage() {
-  const { data: beaches, loading, error } = useFetch('/api/beaches')
+  const { data: beaches, loading, error } = useFetch(apiUrl('/api/beaches'))
   const [activeFilter, setActiveFilter] = useState('all')
 
   const visible = beaches
