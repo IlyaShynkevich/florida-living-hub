@@ -1,12 +1,13 @@
-// Each beach has an `imageUrl`. It currently points at a shared coastal
-// placeholder illustration in the frontend (frontend/public/images/).
-// To show a real photo for a beach, replace only that beach's imageUrl with
-// the real image URL (keep a landscape ~16:10 image for the card image slot).
+// Each beach has an `imageUrl` pointing at a local photo at
+// frontend/public/images/beaches/<id>.jpg (sourced via the Pexels API —
+// free for commercial use, no attribution required).
+// To change a beach's photo, drop a new landscape (~16:10) image at that path,
+// or point imageUrl at a different URL.
 const beaches = [
   // --- SARASOTA & MANATEE COUNTY ---
   {
     id: "siesta-key",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/siesta-key.jpg",
     name: "Siesta Key Beach",
     region: "Sarasota County",
     cityOrArea: "Sarasota",
@@ -34,7 +35,7 @@ const beaches = [
   },
   {
     id: "lido-key",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/lido-key.jpg",
     name: "Lido Key Beach",
     region: "Sarasota County",
     cityOrArea: "Sarasota",
@@ -62,7 +63,7 @@ const beaches = [
   },
   {
     id: "longboat-key",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/longboat-key.jpg",
     name: "Longboat Key Beach",
     region: "Sarasota / Manatee County",
     cityOrArea: "Longboat Key",
@@ -90,7 +91,7 @@ const beaches = [
   },
   {
     id: "anna-maria-island",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/anna-maria-island.jpg",
     name: "Anna Maria Island Beach",
     region: "Manatee County",
     cityOrArea: "Anna Maria",
@@ -118,7 +119,7 @@ const beaches = [
   },
   {
     id: "bradenton-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/bradenton-beach.jpg",
     name: "Bradenton Beach",
     region: "Manatee County",
     cityOrArea: "Anna Maria Island",
@@ -146,7 +147,7 @@ const beaches = [
   },
   {
     id: "coquina-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/coquina-beach.jpg",
     name: "Coquina Beach",
     region: "Manatee County",
     cityOrArea: "Anna Maria Island",
@@ -174,7 +175,7 @@ const beaches = [
   },
   {
     id: "venice-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/venice-beach.jpg",
     name: "Venice Beach",
     region: "Sarasota County",
     cityOrArea: "Venice",
@@ -202,7 +203,7 @@ const beaches = [
   },
   {
     id: "nokomis-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/nokomis-beach.jpg",
     name: "Nokomis Beach",
     region: "Sarasota County",
     cityOrArea: "Nokomis",
@@ -230,7 +231,7 @@ const beaches = [
   },
   {
     id: "manasota-key",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/manasota-key.jpg",
     name: "Manasota Key Beach",
     region: "Charlotte / Sarasota County",
     cityOrArea: "Englewood",
@@ -258,7 +259,7 @@ const beaches = [
   },
   {
     id: "englewood-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/englewood-beach.jpg",
     name: "Englewood Beach",
     region: "Charlotte County",
     cityOrArea: "Englewood",
@@ -286,7 +287,7 @@ const beaches = [
   },
   {
     id: "boca-grande",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/boca-grande.jpg",
     name: "Boca Grande Beach",
     region: "Lee County (Gasparilla Island)",
     cityOrArea: "Boca Grande",
@@ -314,7 +315,7 @@ const beaches = [
   },
   {
     id: "fort-myers-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/fort-myers-beach.jpg",
     name: "Fort Myers Beach",
     region: "Lee County",
     cityOrArea: "Fort Myers Beach",
@@ -342,7 +343,7 @@ const beaches = [
   },
   {
     id: "naples-pier",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/naples-pier.jpg",
     name: "Naples Pier Area",
     region: "Collier County",
     cityOrArea: "Naples",
@@ -370,7 +371,7 @@ const beaches = [
   },
   {
     id: "vanderbilt-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/vanderbilt-beach.jpg",
     name: "Vanderbilt Beach",
     region: "Collier County",
     cityOrArea: "Naples",
@@ -398,7 +399,7 @@ const beaches = [
   },
   {
     id: "clearwater-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/clearwater-beach.jpg",
     name: "Clearwater Beach",
     region: "Pinellas County",
     cityOrArea: "Clearwater",
@@ -426,7 +427,7 @@ const beaches = [
   },
   {
     id: "st-pete-beach",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/st-pete-beach.jpg",
     name: "St. Pete Beach",
     region: "Pinellas County",
     cityOrArea: "St. Pete Beach",
@@ -454,7 +455,7 @@ const beaches = [
   },
   {
     id: "fort-de-soto",
-    imageUrl: "/images/placeholder-beach.svg", // TODO: swap to a real photo URL for this beach
+    imageUrl: "/images/beaches/fort-de-soto.jpg",
     name: "Fort De Soto Park Beach",
     region: "Pinellas County",
     cityOrArea: "Tierra Verde",

@@ -39,7 +39,9 @@
   gap: clamp(2rem, 5vw, 4rem);
 }
 
-.heroContent { max-width: 580px; }
+/* min-width: 0 — grid items default to min-width:auto, and the hero image's
+   intrinsic width would otherwise blow the column out past narrow viewports. */
+.heroContent { max-width: 580px; min-width: 0; }
 .heroContent .eyebrow { color: #7fd3df; margin-bottom: 1.25rem; }
 .heroContent .eyebrow::before { background: var(--coral); }
 
@@ -106,10 +108,11 @@
 }
 
 /* Hero image */
-.heroMedia { position: relative; }
+.heroMedia { position: relative; min-width: 0; }
 .heroImage {
   width: 100%;
   aspect-ratio: 4 / 3;
+  max-height: min(480px, 60vh);
   object-fit: cover;
   display: block;
   border-radius: var(--radius-lg);

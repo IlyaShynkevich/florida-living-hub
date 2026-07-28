@@ -81,14 +81,15 @@ export default function HomePage() {
           </div>
 
           <div className={styles.heroMedia}>
-            {/* Placeholder hero image — swap src to a real Gulf Coast photo
-                (keep a landscape ~4:3 image) with matching descriptive alt text. */}
+            {/* Hero photo (Pexels, free commercial license). Falls back to the
+                placeholder illustration if the file is ever missing. */}
             <img
               className={styles.heroImage}
-              src="/images/placeholder-hero.svg"
-              alt="Sunny Florida Gulf Coast beach with turquoise water, gentle waves, and soft white sand"
-              width="880"
-              height="620"
+              src="/images/hero.jpg"
+              alt="Aerial view of turquoise Gulf of Mexico waves rolling onto a Florida shoreline"
+              width="1200"
+              height="900"
+              onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/placeholder-hero.svg' }}
             />
             <div className={styles.heroCaption}>
               <StatusBadge status="Go" />

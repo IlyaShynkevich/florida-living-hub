@@ -42,7 +42,8 @@ A Gulf Coast beach-day planner that helps locals and visitors choose the right F
 ### Prerequisites
 - Node.js 18+
 - npm
-- No `.env` files required — all data is mock JSON included in the repo
+- No `.env` files required to run the app — all data is mock JSON included in the repo.
+  An optional root `.env` with `PEXELS_API_KEY` is only used by a one-off local script for sourcing beach photos, not by the app itself.
 
 ### 1. Clone the repo
 
@@ -83,14 +84,14 @@ Then open **http://localhost:5173** in your browser.
 
 ## Pages & Navigation
 
-| Route             | Page                    |
-|-------------------|-------------------------|
-| `/`               | Home                    |
-| `/beach-finder`   | Beach Finder (main)     |
-| `/beaches`        | All Beach Conditions    |
-| `/beaches/:id`    | Beach Detail            |
-| `/calculator`     | Utility Cost Calculator |
-| `/about`          | About & Roadmap         |
+| Route             | Page                              |
+|-------------------|------------------------------------|
+| `/`               | Home                               |
+| `/beach-finder`   | Beach Finder (main)                |
+| `/beaches`        | Redirects to `/beach-finder`       |
+| `/beaches/:id`    | Beach Detail                       |
+| `/calculator`     | Utility Cost Calculator            |
+| `/about`          | About & Roadmap                    |
 
 Desktop navbar (>760px): **Home | Beach Finder [Beta] | Utility Calculator | About | Roadmap**
 
@@ -169,8 +170,7 @@ Florida Living Hub/
         │   ├── BottomNav/
         │   ├── Footer/
         │   ├── ScrollToTop/
-        │   ├── BeachCard/
-        │   ├── BeachFinderCard/
+        │   ├── BeachFlipCard/
         │   ├── BeachDetails/
         │   ├── BeachScore/
         │   ├── StatusBadge/
@@ -184,7 +184,6 @@ Florida Living Hub/
         ├── pages/
         │   ├── HomePage
         │   ├── BeachFinderPage
-        │   ├── BeachConditionsPage
         │   ├── BeachDetailPage
         │   ├── UtilityCalculatorPage
         │   └── AboutPage
