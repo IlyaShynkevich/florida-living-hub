@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Florida Living Hub logo — wave">
+  <rect width="32" height="32" rx="7" fill="#0b3057"/>
+  <path d="M4 13 Q8 9 12 13 T20 13 T28 13" fill="none" stroke="#17a2b8" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M4 19 Q8 15 12 19 T20 19 T28 19" fill="none" stroke="#e2593f" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M4 25 Q8 21 12 25 T20 25 T28 25" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" opacity="0.85"/>
+</svg>

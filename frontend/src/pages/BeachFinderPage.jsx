@@ -8,6 +8,7 @@ import styles from './BeachFinderPage.module.css'
 
 const REGION_GROUPS = [
   { id: 'sarasota',  label: 'Sarasota Area' },
+  { id: 'charlotte', label: 'Charlotte County Area' },
   { id: 'tampa',     label: 'Tampa Bay Area' },
   { id: 'southwest', label: 'Southwest Florida / Naples Area' },
 ]
@@ -16,6 +17,7 @@ function getGroup(beach) {
   const r = beach.region
   if (r.includes('Pinellas')) return 'tampa'
   if (r.includes('Lee') || r.includes('Collier')) return 'southwest'
+  if (r.includes('Charlotte')) return 'charlotte'
   return 'sarasota'
 }
 
