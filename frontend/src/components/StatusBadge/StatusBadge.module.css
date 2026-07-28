@@ -1,13 +1,23 @@
 .badge {
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.7rem 0.32rem 0.5rem;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid rgba(11,48,87,0.12);
+  box-shadow: 0 1px 3px rgba(9,42,74,0.1);
   font-size: 0.8rem;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
-.good   { background: var(--green-light); color: var(--green); }
-.caution{ background: var(--yellow-light); color: var(--yellow); }
-.danger { background: var(--red-light); color: var(--red); }
+.flag { width: 18px; height: 18px; flex-shrink: 0; }
+.pole { stroke: var(--text-light); stroke-width: 2; stroke-linecap: round; }
+.pennant { fill: var(--flag); }
+
+/* status → flag color + accessible label color */
+.good   { color: var(--green);      --flag: #2e9e46; }
+.caution{ color: var(--amber-text); --flag: #f2a007; }
+.danger { color: var(--red);        --flag: #d83a3a; }

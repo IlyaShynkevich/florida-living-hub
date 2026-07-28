@@ -32,8 +32,8 @@ export default function BeachDetails({ beach }) {
 
       <div className={styles.hero}>
         <div>
+          <span className="eyebrow">{beach.cityOrArea} &middot; {beach.region}</span>
           <h1 className={styles.name}>{beach.name}</h1>
-          <p className={styles.city}>{beach.cityOrArea} &middot; {beach.region}</p>
           <p className={styles.description}>{beach.shortDescription}</p>
         </div>
         <div className={styles.heroRight}>
@@ -42,7 +42,7 @@ export default function BeachDetails({ beach }) {
         </div>
       </div>
 
-      <section className={styles.section}>
+      <section className={`${styles.section} ${styles.recSection}`}>
         <div className={styles.recHeader}>
           <h2 className={styles.sectionTitle}>Beach Day Recommendation</h2>
           <span className={styles.demoTag}>Demo Data</span>

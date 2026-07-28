@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Illustrated beach scene placeholder">
+  <defs>
+    <linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdeacd"/>
+      <stop offset="1" stop-color="#c6e4f0"/>
+    </linearGradient>
+    <linearGradient id="bsea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2f9fb2"/>
+      <stop offset="1" stop-color="#7bced8"/>
+    </linearGradient>
+    <linearGradient id="bsand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3e6c8"/>
+      <stop offset="1" stop-color="#e7d3a6"/>
+    </linearGradient>
+    <radialGradient id="bsun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ffe3a1"/>
+      <stop offset="0.6" stop-color="#ffd27a"/>
+      <stop offset="1" stop-color="#ffd27a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="480" height="300" fill="url(#bsky)"/>
+  <circle cx="372" cy="86" r="66" fill="url(#bsun)"/>
+  <circle cx="372" cy="86" r="30" fill="#ffd67f"/>
+
+  <rect y="150" width="480" height="74" fill="url(#bsea)"/>
+  <path d="M0 168 q 60 -12 120 0 t 120 0 t 120 0 t 120 0 v 14 H0 Z" fill="#ffffff" opacity="0.18"/>
+  <path d="M0 194 q 50 10 100 0 t 100 0 t 100 0 t 100 0 t 100 0 v 20 H0 Z" fill="#ffffff" opacity="0.12"/>
+
+  <path d="M0 220 q 130 -20 240 -4 t 240 -6 V300 H0 Z" fill="url(#bsand)"/>
+  <path d="M0 232 q 130 -18 240 -2 t 240 -6" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.5"/>
+</svg>

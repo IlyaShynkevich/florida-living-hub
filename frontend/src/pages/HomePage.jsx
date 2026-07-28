@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import FeatureCard from '../components/FeatureCard/FeatureCard'
+import StatusBadge from '../components/StatusBadge/StatusBadge'
 import styles from './HomePage.module.css'
 
 const features = [
@@ -9,19 +10,38 @@ const features = [
   { icon: '🏠', title: 'Utility Cost Calculator', description: 'Estimate monthly electricity, water, and internet costs for Florida cities. Demo estimates only.', to: '/calculator' },
 ]
 
-const roadmapSoon = [
-  { icon: '🗺️', title: 'More Florida Beaches', description: 'East Coast and South Florida regions, plus more Gulf Coast coverage.' },
-  { icon: '📡', title: 'Live Weather & NOAA Data', description: 'Real-time conditions from public weather APIs replacing demo data.' },
-  { icon: '📍', title: 'Interactive Beach Map', description: 'Browse Gulf Coast beaches on a map with condition overlays.' },
-]
-
-const roadmapLater = [
-  { icon: '🍽️', title: 'Restaurants & Local Guides', description: 'Curated food spots, hidden gems, and local dining guides by area.' },
-  { icon: '🏨', title: 'Hotels & Vacation Rentals', description: 'Accommodation guides for Gulf Coast towns and beach communities.' },
-  { icon: '📦', title: 'Moving to Florida Guides', description: 'Practical resources for new residents — cost of living, neighborhoods, and more.' },
-  { icon: '🌀', title: 'Hurricane Prep Checklist', description: 'Season-ready checklists, supply lists, and evacuation zone basics.' },
-  { icon: '🏡', title: 'Flood Zone & Insurance', description: 'Understanding flood maps, homeowners insurance, and what to ask before you buy.' },
-  { icon: '✅', title: 'New Resident Checklist', description: 'Driver license, vehicle registration, voter registration — all the Florida admin in one place.' },
+// A real, ordered roadmap — so it's shown as a timeline, not a card grid.
+const timeline = [
+  {
+    phase: 'Now',
+    state: 'live',
+    heading: 'Gulf Coast beach planner',
+    items: [
+      'Conditions & Beach Day Score for 17 Gulf Coast beaches',
+      'Best Time To Go guidance and parking difficulty per beach',
+      'Monthly utility cost estimator for Florida cities',
+    ],
+  },
+  {
+    phase: 'Next',
+    state: 'soon',
+    heading: 'Deeper, live beach data',
+    items: [
+      'Real-time weather & NOAA data replacing demo conditions',
+      'Interactive Gulf Coast beach map with condition overlays',
+      'East Coast and South Florida beach regions',
+    ],
+  },
+  {
+    phase: 'Later',
+    state: 'planned',
+    heading: 'A full Florida living resource',
+    items: [
+      'Restaurants, hotels, and local guides by area',
+      'Moving-to-Florida guides: cost of living and neighborhoods',
+      'Hurricane prep, flood zones, and new-resident checklists',
+    ],
+  },
 ]
 
 export default function HomePage() {
@@ -29,25 +49,65 @@ export default function HomePage() {
 
   return (
     <div className={styles.page}>
+      {/* ---------- Hero: the thesis is the product's one question ---------- */}
       <section className={styles.hero}>
-        <div className={styles.heroContent}>
-          <span className={styles.betaBadge}>Beach Day Planner — Gulf Coast Beta</span>
-          <h1 className={styles.heroTitle}>Florida Living Hub</h1>
-          <p className={styles.heroSubtitle}>
-            Which Florida Gulf Coast beach should I go to today, and what should I watch out for?
-          </p>
-          <p className={styles.heroDescription}>
-            Florida Living Hub is launching first on the Gulf Coast, helping locals and visitors choose the best beach for today based on weather, UV, red tide, rip-current risk, parking, and practical local tips. More Florida regions coming soon.
-          </p>
-          <button className={styles.ctaBtn} onClick={() => navigate('/beach-finder')}>
-            Find the Best Beach for Today
-          </button>
+        <div className={styles.heroInner}>
+          <div className={styles.heroContent}>
+            <span className="eyebrow">Florida Gulf Coast · Beach-Day Planner</span>
+            <h1 className={styles.heroTitle}>
+              Which beach today&mdash;<span className={styles.heroTitleAccent}>and what to watch out for?</span>
+            </h1>
+            <p className={styles.heroLead}>
+              Florida Living Hub helps locals and visitors pick the right Gulf Coast beach for
+              today, weighing weather, UV, red tide, rip-current risk, parking, and the small
+              local details that make or break a beach day.
+            </p>
+            <div className={styles.heroActions}>
+              <button className={styles.ctaPrimary} onClick={() => navigate('/beach-finder')}>
+                Find the best beach for today
+              </button>
+              <button className={styles.ctaSecondary} onClick={() => navigate('/calculator')}>
+                Estimate living costs
+              </button>
+            </div>
+
+            {/* Flag legend — teaches the site's signal instead of a vanity stat */}
+            <div className={styles.legend}>
+              <span className={styles.legendLabel}>Every beach flies a flag:</span>
+              <StatusBadge status="Go" />
+              <StatusBadge status="Caution" />
+              <StatusBadge status="Avoid" />
+            </div>
+          </div>
+
+          <div className={styles.heroMedia}>
+            {/* Placeholder hero image — swap src to a real Gulf Coast photo
+                (keep a landscape ~4:3 image) with matching descriptive alt text. */}
+            <img
+              className={styles.heroImage}
+              src="/images/placeholder-hero.svg"
+              alt="Sunny Florida Gulf Coast beach with turquoise water, gentle waves, and soft white sand"
+              width="880"
+              height="620"
+            />
+            <div className={styles.heroCaption}>
+              <StatusBadge status="Go" />
+              <span className={styles.heroCaptionText}>Siesta Key &middot; a good day to go</span>
+            </div>
+          </div>
         </div>
-        <div className={styles.heroDecoration} aria-hidden="true">🌊</div>
+
+        <svg className={styles.heroWave} viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0 60 C 240 110 480 110 720 70 C 960 30 1200 30 1440 62 L 1440 110 L 0 110 Z" fill="var(--sand)" />
+        </svg>
       </section>
 
+      {/* ---------- What you can do ---------- */}
       <section className={styles.features}>
-        <h2 className={styles.sectionTitle}>What You Can Do</h2>
+        <header className={styles.sectionHead}>
+          <span className="eyebrow">What you can do</span>
+          <h2 className={styles.sectionTitle}>Plan the day, then head for the coast</h2>
+        </header>
         <div className={styles.featureGrid}>
           {features.map((f) => (
             <FeatureCard key={f.title} icon={f.icon} title={f.title} description={f.description} onClick={() => navigate(f.to)} />
@@ -55,50 +115,36 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ---------- Roadmap as a real timeline ---------- */}
       <section className={styles.roadmap}>
         <div className={styles.roadmapInner}>
-          <div className={styles.roadmapHeader}>
-            <h2 className={styles.roadmapTitle}>What's Coming</h2>
-            <p className={styles.roadmapSubtitle}>
-              Florida Living Hub is starting with Gulf Coast beaches. The plan is to grow into a full Florida living resource — for visitors, new residents, and locals alike.
+          <header className={styles.sectionHead}>
+            <span className="eyebrow">Where this is headed</span>
+            <h2 className={styles.sectionTitle}>Starting at the beach, growing into Florida living</h2>
+            <p className={styles.sectionIntro}>
+              We&rsquo;re building in the open. Here&rsquo;s what works today and what comes next.
             </p>
-          </div>
+          </header>
 
-          <div className={styles.roadmapGroup}>
-            <span className={styles.groupLabel}>Beach Planner — Coming Soon</span>
-            <div className={styles.roadmapGrid}>
-              {roadmapSoon.map((item) => (
-                <div key={item.title} className={styles.roadmapCard}>
-                  <span className={styles.roadmapIcon}>{item.icon}</span>
-                  <div className={styles.roadmapCardBody}>
-                    <div className={styles.roadmapCardHeader}>
-                      <div className={styles.roadmapCardTitle}>{item.title}</div>
-                      <span className={styles.comingSoonBadge}>Soon</span>
-                    </div>
-                    <div className={styles.roadmapCardDesc}>{item.description}</div>
+          <ol className={styles.timeline}>
+            {timeline.map((node) => (
+              <li key={node.phase} className={`${styles.node} ${styles[node.state]}`}>
+                <div className={styles.nodeMarker} aria-hidden="true" />
+                <div className={styles.nodeContent}>
+                  <div className={styles.nodePhaseRow}>
+                    <span className={styles.nodePhase}>{node.phase}</span>
+                    <span className={styles.nodeState}>
+                      {node.state === 'live' ? 'Available' : node.state === 'soon' ? 'In progress' : 'Planned'}
+                    </span>
                   </div>
+                  <h3 className={styles.nodeHeading}>{node.heading}</h3>
+                  <ul className={styles.nodeList}>
+                    {node.items.map((item) => <li key={item}>{item}</li>)}
+                  </ul>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.roadmapGroup}>
-            <span className={styles.groupLabel}>Florida Living Platform — Planned</span>
-            <div className={styles.roadmapGrid}>
-              {roadmapLater.map((item) => (
-                <div key={item.title} className={styles.roadmapCard}>
-                  <span className={styles.roadmapIcon}>{item.icon}</span>
-                  <div className={styles.roadmapCardBody}>
-                    <div className={styles.roadmapCardHeader}>
-                      <div className={styles.roadmapCardTitle}>{item.title}</div>
-                      <span className={`${styles.comingSoonBadge} ${styles.plannedBadge}`}>Planned</span>
-                    </div>
-                    <div className={styles.roadmapCardDesc}>{item.description}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </div>

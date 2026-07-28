@@ -1,14 +1,14 @@
 .footer {
-  background: var(--blue-dark);
+  background: var(--ocean-900);
   color: rgba(255,255,255,0.7);
-  padding: 2rem;
+  padding: 2.75rem 2rem;
   text-align: center;
   margin-top: auto;
 }
 
-.inner { display: flex; flex-direction: column; gap: 0.4rem; align-items: center; }
+.inner { display: flex; flex-direction: column; gap: 0.5rem; align-items: center; }
 
-.brand { font-size: 1.1rem; font-weight: 700; color: var(--white); }
+.brand { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--white); letter-spacing: -0.01em; }
 
 .beta { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 

@@ -1,37 +1,87 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --blue-dark:   #0d3b6e;
-  --blue:        #1565c0;
-  --blue-light:  #e3f0ff;
-  --teal:        #0097a7;
-  --sand:        #f5f0e8;
-  --sand-dark:   #e8dcc8;
+  /* --- Ocean (primary) --- */
+  --ocean-900:  #072b4a;
+  --blue-dark:  #0b3057;
+  --blue:       #145a94;
+  --blue-light: #e4f0fb;
+  --teal:       #05707e;
+  --aqua:       #17a2b8;   /* bright decorative accent on light bg */
+
+  /* --- Sunset coral (accent) --- */
+  --coral:        #e2593f;
+  --coral-strong: #c7442b;  /* use when white text sits on top (AA) */
+
+  /* --- Sand / warm neutral --- */
+  --sand:      #f6f1e9;
+  --sand-dark: #e6dccb;
+  --cream:     #fbf7f0;
+
+  /* --- Semantic status --- */
   --green:       #2e7d32;
-  --green-light: #e8f5e9;
-  --yellow:      #f57f17;
-  --yellow-light:#fff8e1;
+  --green-light: #e7f4e8;
+  --yellow:      #f2a007;   /* bright fill / border only */
+  --amber-text:  #935600;   /* accessible caution TEXT (>=4.5:1 on light) */
+  --yellow-light:#fff5db;
   --red:         #c62828;
-  --red-light:   #ffebee;
-  --text-dark:   #1a2332;
-  --text-mid:    #4a5568;
-  --text-light:  #718096;
-  --white:       #ffffff;
-  --radius:      12px;
-  --shadow:      0 2px 12px rgba(13,59,110,0.10);
-  --shadow-hover:0 6px 24px rgba(13,59,110,0.18);
+  --red-light:   #fdeaea;
+
+  /* --- Text (all AA on white/sand) --- */
+  --text-dark:  #16222f;
+  --text-mid:   #45566a;
+  --text-light: #566475;
+
+  --white: #ffffff;
+
+  /* --- Focus ring (visible on both dark navbar and light pages) --- */
+  --focus: #ffb703;
+
+  /* --- Radii --- */
+  --radius-sm: 8px;
+  --radius:    14px;
+  --radius-lg: 22px;
+
+  /* --- Shadows (ocean-tinted, layered) --- */
+  --shadow:       0 1px 2px rgba(9,42,74,0.06), 0 6px 20px rgba(9,42,74,0.08);
+  --shadow-hover: 0 12px 34px rgba(9,42,74,0.17);
+
+  /* --- Type --- */
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  /* --- Layout & rhythm --- */
+  --maxw:      1120px;
+  --maxw-read: 720px;
+  --section-y: clamp(3.5rem, 7vw, 6rem);
+  --gutter:    clamp(1.25rem, 4vw, 2rem);
 }
 
-html { font-size: 16px; scroll-behavior: smooth; overflow-x: hidden; }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-sans);
   background: var(--sand);
   color: var(--text-dark);
   line-height: 1.6;
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Distinctive display face for headings — set family only, so each
+   component keeps its own size/weight. */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 .app-wrapper {
@@ -47,6 +97,8 @@ body {
   width: 100%;
   /* Space for fixed navbar (64px) so content isn't cut off at top */
   padding-top: 64px;
+  /* So the skip link / hash jumps land below the fixed navbar */
+  scroll-margin-top: 76px;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -54,10 +106,77 @@ button { cursor: pointer; font-family: inherit; }
 ul { list-style: none; }
 img { max-width: 100%; }
 
+/* Visible keyboard focus for every interactive element. Never removed
+   without a replacement — components may override the color, not remove it. */
+:where(a, button, [role="button"], input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---- Shared structural system (used across every page) ---- */
+
+/* Eyebrow: the utility-face role — a tracked uppercase kicker that labels
+   a section without decorating it. Ties the whole site into one system. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--coral);
+}
+.eyebrow.is-centered { justify-content: center; }
+
+/* Data / numeric readouts line up and read as instrument values */
+.tnum { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
+
+/* Standard page container + header rhythm */
+.shell { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.5rem, 5vw, 4rem) var(--gutter); }
+.shell-read { max-width: var(--maxw-read); }
+
+/* Skip to main content — hidden until focused by keyboard users */
+.skip-link {
+  position: fixed;
+  left: 12px;
+  top: -80px;
+  z-index: 1000;
+  background: var(--blue-dark);
+  color: var(--white);
+  padding: 0.7rem 1.15rem;
+  border-radius: 0 0 10px 10px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow);
+  transition: top 0.15s ease;
+}
+.skip-link:focus { top: 0; }
+
 /* Navbar shrinks to 56px and bottom nav appears on mobile */
 @media (max-width: 760px) {
   .main-content {
     padding-top: 56px;
     padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+    scroll-margin-top: 68px;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

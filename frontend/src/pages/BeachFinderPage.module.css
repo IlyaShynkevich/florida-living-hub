@@ -1,37 +1,30 @@
-.page { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem 3rem; }
+.page { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.25rem, 5vw, 3.5rem) var(--gutter) 3rem; }
 
-.betaBanner {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--teal);
-  color: var(--white);
-  border-radius: var(--radius);
-  padding: 0.7rem 1.1rem;
-  font-size: 0.875rem;
+.header { margin-bottom: 1.75rem; max-width: 640px; }
+.header .eyebrow { margin-bottom: 0.8rem; }
+
+.title {
+  font-size: clamp(2rem, 4vw, 2.7rem);
   font-weight: 600;
-  margin-bottom: 1.75rem;
-  line-height: 1.4;
+  color: var(--blue-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
 }
 
-.header { margin-bottom: 1.5rem; }
-
-.title { font-size: 1.9rem; font-weight: 800; color: var(--blue-dark); margin-bottom: 0.35rem; }
-
-.subtitle { color: var(--text-mid); font-size: 0.95rem; }
+.subtitle { color: var(--text-mid); font-size: 1rem; line-height: 1.6; }
 
 .filters {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .filterBtn {
   background: var(--white);
   border: 1.5px solid var(--sand-dark);
   border-radius: 999px;
-  padding: 0.4rem 1rem;
+  padding: 0.45rem 1.05rem;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-mid);
@@ -45,32 +38,35 @@
 }
 
 .filterBtn.active {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
   color: var(--white);
 }
 
-.section { margin-bottom: 2.5rem; }
+.section { margin-bottom: 2.75rem; }
 
+/* Section header reads like a region dateline, not a generic underlined title */
 .sectionTitle {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 0.75rem;
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 600;
   color: var(--blue-dark);
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--blue-light);
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--sand-dark);
 }
 
 .sectionCount {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: var(--text-light);
-  background: var(--blue-light);
-  border-radius: 999px;
-  padding: 0.15rem 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
   white-space: nowrap;
   flex-shrink: 0;
 }

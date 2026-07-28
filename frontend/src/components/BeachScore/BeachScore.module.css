@@ -4,11 +4,11 @@
 
 .scoreRow { display: flex; align-items: baseline; gap: 0.15rem; margin-bottom: 0.4rem; }
 
-.number { font-size: 1.8rem; font-weight: 800; line-height: 1; }
-.outOf  { font-size: 0.9rem; color: var(--text-light); }
+.number { font-family: var(--font-display); font-size: 2rem; font-weight: 600; line-height: 1; font-variant-numeric: tabular-nums; }
+.outOf  { font-size: 0.9rem; color: var(--text-light); font-variant-numeric: tabular-nums; }
 
 .high { color: var(--green); }
-.mid  { color: var(--yellow); }
+.mid  { color: var(--amber-text); }
 .low  { color: var(--red); }
 
 .bar  { height: 6px; background: var(--sand-dark); border-radius: 3px; overflow: hidden; }

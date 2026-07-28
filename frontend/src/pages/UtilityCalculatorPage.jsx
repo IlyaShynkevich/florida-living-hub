@@ -5,6 +5,7 @@ export default function UtilityCalculatorPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
+        <span className="eyebrow">Planning tool &middot; beyond the beach</span>
         <h1 className={styles.title}>Florida Utility Cost Calculator</h1>
         <p className={styles.subtitle}>
           Florida Living Hub starts with Gulf Coast beach planning, but also includes early tools

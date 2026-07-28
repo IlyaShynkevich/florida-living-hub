@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import useFetch from '../hooks/useFetch'
-import BeachFinderCard from '../components/BeachFinderCard/BeachFinderCard'
+import BeachFlipCard from '../components/BeachFlipCard/BeachFlipCard'
 import LoadingState from '../components/LoadingState/LoadingState'
 import ErrorState from '../components/ErrorState/ErrorState'
 import SafetyDisclaimer from '../components/SafetyDisclaimer/SafetyDisclaimer'
@@ -33,15 +33,13 @@ export default function BeachFinderPage() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.betaBanner}>
-        <span>🌊</span>
-        Gulf Coast Beta &mdash; currently covering {beaches ? beaches.length : '—'} beaches along Florida&rsquo;s Gulf Coast. More regions coming soon.
-      </div>
-
       <div className={styles.header}>
+        <span className="eyebrow">Gulf Coast Beta &middot; {beaches ? beaches.length : 17} beaches</span>
         <h1 className={styles.title}>Beach Finder</h1>
         <p className={styles.subtitle}>
-          Browse Gulf Coast beaches and find the right fit for your trip.
+          Browse Gulf Coast beaches by region and find the right fit for today&rsquo;s trip.
+          Each beach flies a flag &mdash; green to go, yellow for caution, red to stay out.
+          Tap any card to flip between the overview and today&rsquo;s conditions.
         </p>
       </div>
 
@@ -76,7 +74,7 @@ export default function BeachFinderPage() {
           </h2>
           <div className={styles.grid}>
             {group.beaches.map(beach => (
-              <BeachFinderCard key={beach.id} beach={beach} />
+              <BeachFlipCard key={beach.id} beach={beach} />
             ))}
           </div>
         </section>
