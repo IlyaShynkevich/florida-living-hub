@@ -7,7 +7,11 @@ export default function ScrollToTop() {
     if (hash) {
       const el = document.getElementById(hash.slice(1))
       if (el) {
-        el.scrollIntoView({ behavior: 'smooth' })
+        // Fixed navbar overlaps the top of the viewport (64px desktop, 56px mobile).
+        // Offset the smooth scroll so the target isn't hidden underneath it.
+        const navHeight = window.matchMedia('(max-width: 760px)').matches ? 56 : 64
+        const y = el.getBoundingClientRect().top + window.scrollY - navHeight - 12
+        window.scrollTo({ top: y, behavior: 'smooth' })
         return
       }
     }
