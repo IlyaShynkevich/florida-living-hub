@@ -22,7 +22,12 @@ export default function AboutPage() {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>About Florida Living Hub</h1>
+        <span className="eyebrow">About</span>
+        <h1 className={styles.title}>A calm, honest guide to the Gulf Coast</h1>
+        <p className={styles.lede}>
+          Florida Living Hub answers one question well before it tries to do anything else&mdash;
+          which beach today, and what to watch out for.
+        </p>
       </div>
 
       <div className={styles.content}>

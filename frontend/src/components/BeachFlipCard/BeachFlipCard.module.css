@@ -1,0 +1,187 @@
+/* Outer holds the 3D perspective + hover lift (never rotates itself) */
+.card {
+  position: relative;
+  perspective: 1600px;
+  border-radius: var(--radius);
+  min-width: 0;
+  max-width: 100%;
+  transition: transform 0.2s ease;
+}
+.card:hover { transform: translateY(-5px); }
+
+/* Inner rotates; both faces are stacked in the same grid cell so the
+   card sizes to the taller side and neither face ever clips. */
+.inner {
+  position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.inner.flipped { transform: rotateY(180deg); }
+.inner:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: var(--radius); }
+
+.face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid rgba(11,48,87,0.06);
+  border-top: 4px solid transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.card:hover .face { box-shadow: var(--shadow-hover); }
+.back { transform: rotateY(180deg); }
+
+.Go .face      { border-top-color: var(--green); }
+.Caution .face { border-top-color: var(--yellow); }
+.Avoid .face   { border-top-color: var(--red); }
+
+/* ---------------- Front ---------------- */
+.media { position: relative; width: 100%; }
+.image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--blue-light);
+}
+.mediaBadges {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+}
+.demoBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.92);
+  color: var(--text-mid);
+  border-radius: 5px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.body { display: flex; flex-direction: column; gap: 0.7rem; padding: 1.15rem 1.25rem 1.05rem; flex: 1; }
+
+.name { font-size: 1.18rem; font-weight: 600; color: var(--blue-dark); margin-bottom: 0.15rem; line-height: 1.25; }
+.location {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.description {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--sand-dark);
+}
+.metaItem { display: flex; align-items: flex-start; gap: 0.45rem; font-size: 0.8rem; color: var(--text-mid); }
+.metaIcon { flex-shrink: 0; line-height: 1.4; }
+.parkingText {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+/* ---------------- Back ---------------- */
+.backBody { display: flex; flex-direction: column; gap: 0.85rem; padding: 1.15rem 1.25rem 1.05rem; flex: 1; }
+
+.backHead { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.6rem; }
+.backKicker {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.2rem;
+}
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; }
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--sand);
+  border: 1px solid var(--sand-dark);
+  border-radius: 10px;
+  padding: 0.55rem 0.25rem;
+  text-align: center;
+}
+.statIcon  { font-size: 1.1rem; }
+.statLabel { font-size: 0.7rem; color: var(--text-light); margin-top: 0.1rem; }
+.statValue { font-size: 0.92rem; font-weight: 700; color: var(--text-dark); }
+
+.risks { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.riskBadge { font-size: 0.75rem; padding: 0.22rem 0.65rem; border-radius: 20px; font-weight: 600; }
+.riskLow  { background: var(--green-light);  color: var(--green); }
+.riskMod  { background: var(--yellow-light); color: var(--amber-text); }
+.riskHigh { background: var(--red-light);    color: var(--red); }
+.tideNone { background: var(--green-light);  color: var(--green); }
+.tideLow  { background: var(--yellow-light); color: var(--amber-text); }
+.tideMed  { background: #ffe8cc; color: #b34700; }
+.tideHigh { background: var(--red-light);    color: var(--red); }
+
+/* ---------------- Shared footer + flip affordance ---------------- */
+.footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-top: 0.7rem;
+}
+.detailsLink { font-size: 0.85rem; font-weight: 700; color: var(--coral-strong); white-space: nowrap; }
+.detailsLink:hover { text-decoration: underline; }
+
+.flipHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  background: var(--sand);
+  border: 1px solid var(--sand-dark);
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  white-space: nowrap;
+}
+.flipIcon { font-size: 0.85rem; line-height: 1; }
+
+/* Nudge the flip hint on hover so the interaction reads as available */
+.card:hover .flipIcon { animation: nudge 0.8s ease; }
+@keyframes nudge {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(180deg); }
+}
+
+@media (max-width: 400px) {
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}

@@ -10,3 +10,6 @@ dist/
 # Environment
 .env
 .env.local
+
+# Claude Code local config
+.claude/

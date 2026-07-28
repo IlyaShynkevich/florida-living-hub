@@ -5,14 +5,14 @@
 .message { color: var(--text-mid); font-size: 0.95rem; max-width: 400px; }
 
 .retry {
-  padding: 0.5rem 1.25rem;
-  background: var(--blue);
+  padding: 0.6rem 1.4rem;
+  background: var(--coral-strong);
   color: var(--white);
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 0.9rem;
-  font-weight: 600;
-  transition: background 0.15s;
+  font-weight: 700;
+  transition: background 0.15s, transform 0.15s;
 }
 
-.retry:hover { background: var(--blue-dark); }
+.retry:hover { background: var(--coral); transform: translateY(-1px); }
