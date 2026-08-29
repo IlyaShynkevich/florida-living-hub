@@ -6,8 +6,8 @@
  *   - sea surface temperature                              (marine-api.open-meteo.com/v1/marine)
  *
  * Both endpoints accept comma-separated coordinate lists, so a full refresh of
- * all 17 beaches costs exactly 2 HTTP calls. At the default 20-minute interval
- * that is ~144 calls/day.
+ * all 17 beaches costs exactly 2 HTTP calls. At the default 60-minute interval
+ * that is ~48 calls/day.
  *
  * ---------------------------------------------------------------------------
  * LICENSING / COMMERCIAL USE
@@ -33,13 +33,33 @@ const beaches = require("../data/beaches");
 const FORECAST_URL = "https://api.open-meteo.com/v1/forecast";
 const MARINE_URL = "https://marine-api.open-meteo.com/v1/marine";
 
-const REFRESH_MINUTES = Number(process.env.WEATHER_REFRESH_MINUTES || 20);
+const REFRESH_MINUTES = Number(process.env.WEATHER_REFRESH_MINUTES || 60);
 const REQUEST_TIMEOUT_MS = Number(process.env.WEATHER_TIMEOUT_MS || 15000);
 // After a failure, retry sooner than the normal cadence so a transient blip
 // does not leave the app on stale data for a full refresh interval.
 const RETRY_MINUTES = Number(process.env.WEATHER_RETRY_MINUTES || 2);
 // Past this age the cached snapshot is reported as "stale" rather than "live".
-const STALE_AFTER_MS = REFRESH_MINUTES * 3 * 60 * 1000;
+//
+// Deliberately a FIXED 90 minutes, not a multiple of REFRESH_MINUTES. Deriving
+// it from the refresh interval meant that slowing refreshes down silently
+// widened the outage-detection window too — raising REFRESH_MINUTES from 20 to
+// 60 pushed this from 60 minutes to 180, so up to three hours of stale weather
+// would still have been reported as live. How often we poll and how long we are
+// willing to serve an unrefreshed snapshot are separate decisions, so they are
+// now separate constants: tuning the former no longer moves the latter.
+//
+// 90 minutes leaves room for one missed hourly refresh plus retries before the
+// feed is called stale. If REFRESH_MINUTES is ever raised above 90, refreshes
+// would age out before the next one lands — see the guard below.
+const STALE_AFTER_MINUTES = 90;
+const STALE_AFTER_MS = STALE_AFTER_MINUTES * 60 * 1000;
+
+if (REFRESH_MINUTES >= STALE_AFTER_MINUTES) {
+  throw new Error(
+    `WEATHER_REFRESH_MINUTES (${REFRESH_MINUTES}) must be below the ${STALE_AFTER_MINUTES}-minute ` +
+      `staleness threshold, otherwise every snapshot is reported stale before the next refresh lands`
+  );
+}
 
 // --- module state -----------------------------------------------------------
 

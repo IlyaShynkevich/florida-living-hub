@@ -90,7 +90,7 @@ export default function AboutPage() {
           <p>
             Beach weather is live: air temperature, water temperature, wind speed, UV index and
             weather condition come from the Open-Meteo forecast and marine APIs, refreshed on the
-            server every 20 minutes. Rip current risk, red tide status and the utility cost
+            server every 60 minutes. Rip current risk, red tide status and the utility cost
             estimates are still demo data and are not live. Nothing here should be used for safety
             decisions — always check official local sources and posted beach flags before swimming.
           </p>

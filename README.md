@@ -10,7 +10,7 @@ A Gulf Coast beach-day planner that helps locals and visitors choose the right F
 
 ### Beach Planner
 - **Beach Finder** — browse 17 Gulf Coast beaches grouped by region with filters
-- **Beach Conditions** — per-beach air temperature, water temperature, wind speed, UV index and weather condition are **live from [Open-Meteo](https://open-meteo.com)**, refreshed server-side every ~20 minutes; rip current risk and red tide status remain **demo/mock data**
+- **Beach Conditions** — per-beach air temperature, water temperature, wind speed, UV index and weather condition are **live from [Open-Meteo](https://open-meteo.com)**, refreshed server-side every ~60 minutes; rip current risk and red tide status remain **demo/mock data**
 - **Beach Day Score** — 0–100 score calculated from safety and comfort factors
 - **Safety Status** — Go / Caution / Avoid per beach, derived from the same score
 - **Best Time To Go** — recommended visit window based on live UV and heat
@@ -155,7 +155,7 @@ Health check for the live weather pipeline. Returns **200** while the feed is he
     "fetchedAt": "2026-08-29T08:36:34.821Z",
     "lastSuccessAt": "2026-08-29T08:36:34.821Z",
     "ageMinutes": 0,
-    "refreshIntervalMinutes": 20,
+    "refreshIntervalMinutes": 60,
     "liveFields": ["airTemperature", "waterTemperature", "windSpeed", "uvIndex", "weatherCondition"],
     "demoFields": ["ripCurrentRisk", "redTideStatus"],
     "error": null
@@ -254,7 +254,7 @@ Florida Living Hub/
 
 ## Data Notice
 
-Beach **weather is live**. Air temperature, water temperature, wind speed, UV index and weather condition are fetched server-side from the [Open-Meteo](https://open-meteo.com) forecast and marine APIs and refreshed every 20 minutes (configurable via `WEATHER_REFRESH_MINUTES`). All 17 beaches are covered by two batched requests per refresh — roughly 144 calls/day.
+Beach **weather is live**. Air temperature, water temperature, wind speed, UV index and weather condition are fetched server-side from the [Open-Meteo](https://open-meteo.com) forecast and marine APIs and refreshed every 60 minutes (configurable via `WEATHER_REFRESH_MINUTES`). All 17 beaches are covered by two batched requests per refresh — roughly 48 calls/day. A snapshot that has not refreshed within **90 minutes** is flagged `stale` rather than passed off as current — a fixed threshold, deliberately not tied to the refresh interval, so slowing refreshes down does not quietly widen the window for undetected outages.
 
 > **Licensing:** the Open-Meteo free tier is **non-commercial only** and limited to about 10,000 calls/day. A paid Open-Meteo plan (or an equivalent licensed provider) is required before any commercial launch.
 
