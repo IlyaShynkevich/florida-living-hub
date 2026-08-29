@@ -4,6 +4,7 @@ const cors = require("cors");
 const beachRoutes = require("./routes/beaches");
 const utilityRoutes = require("./routes/utility");
 const errorHandler = require("./middleware/errorHandler");
+const weatherService = require("./services/weatherService");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -23,6 +24,16 @@ app.get("/", (req, res) => {
   res.json({ message: "Florida Living Hub API is running" });
 });
 
+// Health probe for the live weather pipeline. Returns 503 when the Open-Meteo
+// feed is stale or unavailable so an uptime monitor catches a silent break.
+app.get("/api/live-data-status", (req, res) => {
+  const status = weatherService.getStatus();
+  res.status(status.status === "live" ? 200 : 503).json({
+    success: status.status === "live",
+    data: status,
+  });
+});
+
 app.use("/api/beaches", beachRoutes);
 app.use("/api", utilityRoutes);
 
@@ -31,6 +42,11 @@ app.use((req, res) => {
 });
 
 app.use(errorHandler);
+
+// Kick off the first Open-Meteo fetch and the periodic refresh. Failures are
+// logged with a [weather] ERROR prefix and surfaced via meta.liveData on
+// /api/beaches and /api/live-data-status — they are never swallowed.
+weatherService.start();
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

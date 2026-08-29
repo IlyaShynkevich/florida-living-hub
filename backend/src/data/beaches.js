@@ -1,3 +1,13 @@
+// Static beach reference data.
+//
+// Condition fields are deliberately split:
+//   - LIVE (added at request time by services/weatherService.js from Open-Meteo):
+//     airTemperature, waterTemperature, windSpeed, uvIndex, weatherCondition
+//   - DEMO (hardcoded below, not connected to any feed):
+//     ripCurrentRisk, redTideStatus
+//
+// `latitude`/`longitude` are the coordinates used for the Open-Meteo lookups.
+//
 // Each beach has an `imageUrl` pointing at a local photo at
 // frontend/public/images/beaches/<id>.jpg (sourced via the Pexels API —
 // free for commercial use, no attribution required).
@@ -7,6 +17,8 @@ const beaches = [
   // --- SARASOTA & MANATEE COUNTY ---
   {
     id: "siesta-key",
+    latitude: 27.2668,
+    longitude: -82.5545,
     imageUrl: "/images/beaches/siesta-key.jpg",
     name: "Siesta Key Beach",
     region: "Sarasota County",
@@ -23,18 +35,16 @@ const beaches = [
     cautionNotes: "[DEMO] Always check current rip current flags and official advisories before entering the water.",
     nearbyFoodIdeas: ["Siesta Key Village restaurants", "Snack shacks near main pavilion", "The Old Salty Dog (10 min)"],
     nearbyActivityIdeas: ["Beach volleyball courts", "Kayak and paddleboard rentals", "Siesta Key Village shops"],
-    dataStatus: "demo",
-    airTemperature: 86,
-    waterTemperature: 82,
-    windSpeed: 9,
-    uvIndex: 8,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Arrive early — parking fills fast", "UV typically high, use SPF 50+", "Check flag colors at the water's edge for safety status"],
   },
   {
     id: "lido-key",
+    latitude: 27.3095,
+    longitude: -82.5755,
     imageUrl: "/images/beaches/lido-key.jpg",
     name: "Lido Key Beach",
     region: "Sarasota County",
@@ -51,18 +61,16 @@ const beaches = [
     cautionNotes: "[DEMO] Water conditions change — check local flag system before swimming.",
     nearbyFoodIdeas: ["Columbia Restaurant on St. Armands Circle", "Crab & Fin", "The Daiquiri Deck"],
     nearbyActivityIdeas: ["St. Armands Circle shops", "Mote Marine Laboratory", "Kayak rentals"],
-    dataStatus: "demo",
-    airTemperature: 85,
-    waterTemperature: 81,
-    windSpeed: 10,
-    uvIndex: 8,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["St. Armands Circle is walkable for dining", "Shallow water good for small children", "Check official advisories for current conditions"],
   },
   {
     id: "longboat-key",
+    latitude: 27.4,
+    longitude: -82.65,
     imageUrl: "/images/beaches/longboat-key.jpg",
     name: "Longboat Key Beach",
     region: "Sarasota / Manatee County",
@@ -79,18 +87,16 @@ const beaches = [
     cautionNotes: "[DEMO] No lifeguards at most access points — exercise caution. Check current conditions before swimming.",
     nearbyFoodIdeas: ["Mar Vista Dockside Restaurant", "Euphemia Haye", "Whitney's Longboat Key"],
     nearbyActivityIdeas: ["Fishing charters", "Kayak and paddleboard rental", "Longboat Key Club golf"],
-    dataStatus: "demo",
-    airTemperature: 85,
-    waterTemperature: 81,
-    windSpeed: 11,
-    uvIndex: 8,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Partly Cloudy",
     tips: ["No lifeguards — stay aware of conditions", "Public access points can be hard to find — check maps beforehand", "Excellent shelling early morning"],
   },
   {
     id: "anna-maria-island",
+    latitude: 27.531,
+    longitude: -82.733,
     imageUrl: "/images/beaches/anna-maria-island.jpg",
     name: "Anna Maria Island Beach",
     region: "Manatee County",
@@ -107,18 +113,16 @@ const beaches = [
     cautionNotes: "[DEMO] Check flag conditions at the beach before swimming. Water can have boat traffic near passes.",
     nearbyFoodIdeas: ["The Sandbar Restaurant", "Anna Maria Oyster Bar", "Beach Bistro"],
     nearbyActivityIdeas: ["Island trolley tour", "Fishing pier", "Kayak and boat rentals"],
-    dataStatus: "demo",
-    airTemperature: 84,
-    waterTemperature: 81,
-    windSpeed: 10,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Use the free island trolley — parking is very limited", "Dolphins frequently spotted near the pier", "Check official conditions before swimming"],
   },
   {
     id: "bradenton-beach",
+    latitude: 27.4673,
+    longitude: -82.7003,
     imageUrl: "/images/beaches/bradenton-beach.jpg",
     name: "Bradenton Beach",
     region: "Manatee County",
@@ -135,18 +139,16 @@ const beaches = [
     cautionNotes: "[DEMO] Check local flag system for current swim safety. Boat traffic near the pass.",
     nearbyFoodIdeas: ["Bridge Street Bistro", "Eat Here", "Sato Japanese Cuisine"],
     nearbyActivityIdeas: ["Bridge Street shops and galleries", "Fishing off the historic bridge", "Boat tours"],
-    dataStatus: "demo",
-    airTemperature: 84,
-    waterTemperature: 81,
-    windSpeed: 10,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Bridge Street has great small restaurants", "Use the island trolley for parking ease", "Good sunset spot"],
   },
   {
     id: "coquina-beach",
+    latitude: 27.4548,
+    longitude: -82.6952,
     imageUrl: "/images/beaches/coquina-beach.jpg",
     name: "Coquina Beach",
     region: "Manatee County",
@@ -163,18 +165,16 @@ const beaches = [
     cautionNotes: "[DEMO] Always check the current flag system displayed at the beach before entering the water.",
     nearbyFoodIdeas: ["Snack bar at Coquina Beach pavilion", "Anna Maria Oyster Bar (5 min)", "The Waterfront Restaurant"],
     nearbyActivityIdeas: ["Picnic pavilions", "Beach volleyball", "Kayak launch access"],
-    dataStatus: "demo",
-    airTemperature: 85,
-    waterTemperature: 81,
-    windSpeed: 9,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Best parking on the island — still free", "Pavilion has covered picnic areas", "Gradual water entry good for children"],
   },
   {
     id: "venice-beach",
+    latitude: 27.1,
+    longitude: -82.455,
     imageUrl: "/images/beaches/venice-beach.jpg",
     name: "Venice Beach",
     region: "Sarasota County",
@@ -191,18 +191,16 @@ const beaches = [
     cautionNotes: "[DEMO] Check conditions before swimming. Always observe posted flag warnings.",
     nearbyFoodIdeas: ["Sharky's on the Pier", "Fins at Sharky's", "Snook Haven"],
     nearbyActivityIdeas: ["Shark tooth hunting along the shoreline", "Venice Fishing Pier", "Historic Venice Ave downtown"],
-    dataStatus: "demo",
-    airTemperature: 85,
-    waterTemperature: 80,
-    windSpeed: 11,
-    uvIndex: 8,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Bring a mesh sifting scoop for shark tooth hunting", "Sharky's pier restaurant right on the beach", "Arrive early on weekends"],
   },
   {
     id: "nokomis-beach",
+    latitude: 27.122,
+    longitude: -82.4738,
     imageUrl: "/images/beaches/nokomis-beach.jpg",
     name: "Nokomis Beach",
     region: "Sarasota County",
@@ -219,18 +217,16 @@ const beaches = [
     cautionNotes: "[DEMO] No lifeguards — be aware of current and wave conditions before swimming.",
     nearbyFoodIdeas: ["Pop's Sunset Grill", "Nokomis Beach Snack Shack", "Casey Key Fish House"],
     nearbyActivityIdeas: ["Tuesday & Friday drum circles at sunset", "Kayak launches", "Fishing"],
-    dataStatus: "demo",
-    airTemperature: 84,
-    waterTemperature: 80,
-    windSpeed: 10,
-    uvIndex: 8,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Partly Cloudy",
     tips: ["Drum circle Tues & Fri at sunset — free and popular", "Free parking but fills fast on drum circle evenings", "Low-key alternative to Siesta Key crowds"],
   },
   {
     id: "manasota-key",
+    latitude: 26.9556,
+    longitude: -82.3866,
     imageUrl: "/images/beaches/manasota-key.jpg",
     name: "Manasota Key Beach",
     region: "Charlotte / Sarasota County",
@@ -247,18 +243,16 @@ const beaches = [
     cautionNotes: "[DEMO] No lifeguards — exercise caution. Check conditions before entering the water.",
     nearbyFoodIdeas: ["Flounders on the Beach", "Gulf View Grill", "Waverly's Restaurant"],
     nearbyActivityIdeas: ["Shelling walks", "Kayak launch at Blind Pass", "Wildlife watching"],
-    dataStatus: "demo",
-    airTemperature: 84,
-    waterTemperature: 80,
-    windSpeed: 10,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Some of the best shelling on the Gulf Coast", "No crowds compared to Siesta Key", "Bring your own shade — minimal facilities"],
   },
   {
     id: "englewood-beach",
+    latitude: 26.9184,
+    longitude: -82.3556,
     imageUrl: "/images/beaches/englewood-beach.jpg",
     name: "Englewood Beach",
     region: "Charlotte County",
@@ -275,18 +269,16 @@ const beaches = [
     cautionNotes: "[DEMO] Check current conditions and flag system before swimming.",
     nearbyFoodIdeas: ["Lemon Bay Oyster Bar", "The Pub at Englewood", "The Waverly"],
     nearbyActivityIdeas: ["Stump Pass Beach State Park nearby", "Fishing", "Kayak rentals"],
-    dataStatus: "demo",
-    airTemperature: 84,
-    waterTemperature: 79,
-    windSpeed: 11,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Partly Cloudy",
     tips: ["Less crowded than Sarasota beaches", "Stump Pass State Park is a short drive for more nature", "Easier and cheaper parking than farther north"],
   },
   {
     id: "boca-grande",
+    latitude: 26.7465,
+    longitude: -82.262,
     imageUrl: "/images/beaches/boca-grande.jpg",
     name: "Boca Grande Beach",
     region: "Lee County (Gasparilla Island)",
@@ -303,18 +295,16 @@ const beaches = [
     cautionNotes: "[DEMO] Pass currents can be strong near the south end. Check conditions before swimming.",
     nearbyFoodIdeas: ["The Loose Caboose", "The Pink Elephant", "Temptation Restaurant"],
     nearbyActivityIdeas: ["Tarpon fishing charters", "Gasparilla Island State Park", "Boca Grande Lighthouse", "Bike rentals"],
-    dataStatus: "demo",
-    airTemperature: 86,
-    waterTemperature: 82,
-    windSpeed: 10,
-    uvIndex: 8,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Toll road to island — have cash or card ready", "Tarpon season peaks in spring and early summer", "Rent a bike to explore the charming village"],
   },
   {
     id: "fort-myers-beach",
+    latitude: 26.4519,
+    longitude: -81.9503,
     imageUrl: "/images/beaches/fort-myers-beach.jpg",
     name: "Fort Myers Beach",
     region: "Lee County",
@@ -331,18 +321,16 @@ const beaches = [
     cautionNotes: "[DEMO] Check current rip current conditions — can be elevated near the pass. Verify before swimming.",
     nearbyFoodIdeas: ["Doc Ford's Rum Bar", "Nervous Nellie's", "Lani Kai Island Resort"],
     nearbyActivityIdeas: ["Times Square shopping and dining", "Boat and jet ski rentals", "Estero Bay kayaking", "Shelling cruises"],
-    dataStatus: "demo",
-    airTemperature: 87,
-    waterTemperature: 82,
-    windSpeed: 12,
-    uvIndex: 9,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Moderate",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Times Square area is walkable for food and entertainment", "Parking is easier on the north end of Estero Blvd", "Afternoon thunderstorms common in summer — plan accordingly"],
   },
   {
     id: "naples-pier",
+    latitude: 26.1312,
+    longitude: -81.8085,
     imageUrl: "/images/beaches/naples-pier.jpg",
     name: "Naples Pier Area",
     region: "Collier County",
@@ -359,18 +347,16 @@ const beaches = [
     cautionNotes: "[DEMO] Check current conditions before swimming. Always observe posted flag warnings.",
     nearbyFoodIdeas: ["The Dock at Crayton Cove", "Sea Salt Naples", "Bha! Bha! Persian Bistro"],
     nearbyActivityIdeas: ["Naples Pier fishing", "5th Avenue South shopping", "Dolphin watching", "Kayak tours"],
-    dataStatus: "demo",
-    airTemperature: 87,
-    waterTemperature: 83,
-    windSpeed: 9,
-    uvIndex: 9,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Sunset at the pier is a Naples institution — arrive 20 min early", "5th Ave South has excellent dining a short walk away", "Dolphins frequently spotted near the pier"],
   },
   {
     id: "vanderbilt-beach",
+    latitude: 26.2555,
+    longitude: -81.8225,
     imageUrl: "/images/beaches/vanderbilt-beach.jpg",
     name: "Vanderbilt Beach",
     region: "Collier County",
@@ -387,18 +373,16 @@ const beaches = [
     cautionNotes: "[DEMO] Check local flag conditions before entering the water.",
     nearbyFoodIdeas: ["The Turtle Club", "Baleen at LaPlaya", "Buzz's Lighthouse"],
     nearbyActivityIdeas: ["Kayak rentals", "Paddleboarding", "Delnor-Wiggins Pass State Park (nearby)"],
-    dataStatus: "demo",
-    airTemperature: 87,
-    waterTemperature: 83,
-    windSpeed: 8,
-    uvIndex: 9,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Less crowded than Naples Pier — good alternative", "Delnor-Wiggins Pass State Park just north for more nature", "Parking garage fills by mid-morning in winter season"],
   },
   {
     id: "clearwater-beach",
+    latitude: 27.9775,
+    longitude: -82.83,
     imageUrl: "/images/beaches/clearwater-beach.jpg",
     name: "Clearwater Beach",
     region: "Pinellas County",
@@ -415,18 +399,16 @@ const beaches = [
     cautionNotes: "[DEMO] Rip current risk can be elevated — always check flags before swimming. Verify current conditions locally.",
     nearbyFoodIdeas: ["Frenchy's Rockaway Grill", "Crabby's Dockside", "Palm Pavilion Beachside Grill"],
     nearbyActivityIdeas: ["Pier 60 nightly sunset festival", "Dolphin watch tours", "Parasailing", "Jet ski rentals"],
-    dataStatus: "demo",
-    airTemperature: 84,
-    waterTemperature: 80,
-    windSpeed: 14,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Moderate",
     redTideStatus: "Low",
-    weatherCondition: "Partly Cloudy",
     tips: ["Pier 60 sunset festival is free and runs nightly", "Parking is expensive and limited — arrive early or use rideshare", "Dolphin watch cruises depart from the marina"],
   },
   {
     id: "st-pete-beach",
+    latitude: 27.7253,
+    longitude: -82.7412,
     imageUrl: "/images/beaches/st-pete-beach.jpg",
     name: "St. Pete Beach",
     region: "Pinellas County",
@@ -443,18 +425,16 @@ const beaches = [
     cautionNotes: "[DEMO] Always check posted flags before swimming. Conditions vary by location along the beach.",
     nearbyFoodIdeas: ["Hurricane Seafood Restaurant", "Undertow Beach Bar", "Sea Critters Cafe"],
     nearbyActivityIdeas: ["Don CeSar hotel visit", "Parasailing", "Sunset cruise from Corey Ave marina", "Corey Ave Sunday Market"],
-    dataStatus: "demo",
-    airTemperature: 85,
-    waterTemperature: 80,
-    windSpeed: 13,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Partly Cloudy",
     tips: ["The pink Don CeSar hotel is a Gulf Coast landmark", "Corey Ave Sunday Market is excellent", "Gulf Blvd has a continuous strip of beachside dining"],
   },
   {
     id: "fort-de-soto",
+    latitude: 27.6376,
+    longitude: -82.7367,
     imageUrl: "/images/beaches/fort-de-soto.jpg",
     name: "Fort De Soto Park Beach",
     region: "Pinellas County",
@@ -471,14 +451,10 @@ const beaches = [
     cautionNotes: "[DEMO] Check current conditions before swimming. Some areas have boat traffic — stay within designated swim zones.",
     nearbyFoodIdeas: ["Snack bar and concessions inside the park", "Tierra Verde restaurants (short drive)", "Fresco's Waterfront Bistro (nearby)"],
     nearbyActivityIdeas: ["Historic Fort De Soto tour", "Dog beach", "Kayak and canoe rentals", "Camping", "Birdwatching trails", "Fishing pier"],
-    dataStatus: "demo",
-    airTemperature: 84,
-    waterTemperature: 80,
-    windSpeed: 12,
-    uvIndex: 7,
+    // Demo/mock safety data — NOT live. Air/water temperature, wind, UV and
+    // weather condition are fetched live from Open-Meteo (see services/weatherService.js).
     ripCurrentRisk: "Low",
     redTideStatus: "None",
-    weatherCondition: "Sunny",
     tips: ["Small toll to enter — have cash or E-Pass", "Dog beach is one of the best in Florida", "Book campsites well in advance — fills up fast"],
   },
 ];

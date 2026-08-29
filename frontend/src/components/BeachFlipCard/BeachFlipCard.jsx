@@ -7,12 +7,21 @@ import styles from './BeachFlipCard.module.css'
 const riskColor = { Low: styles.riskLow, Moderate: styles.riskMod, High: styles.riskHigh }
 const tideColor = { None: styles.tideNone, Low: styles.tideLow, Medium: styles.tideMed, High: styles.tideHigh }
 
+// Weather/UV/temps come from Open-Meteo; rip current and red tide are still demo.
+// A degraded or unavailable feed is called out on the card rather than hidden.
+const DATA_BADGE = {
+  'live-weather': { text: 'Live Weather', broken: false },
+  degraded: { text: 'Weather Data Incomplete', broken: true },
+  unavailable: { text: 'Weather Unavailable', broken: true },
+}
+
 // One card, two sides:
 //   front = overview (photo, description, family-friendly, parking)
 //   back  = today's conditions (stats grid + Beach Day Score)
 // Tapping/clicking the card flips it; "View Details" links out to the full page.
 export default function BeachFlipCard({ beach }) {
   const [flipped, setFlipped] = useState(false)
+  const dataBadge = DATA_BADGE[beach.dataStatus] || null
 
   const toggle = () => setFlipped((f) => !f)
   const onKeyDown = (e) => {
@@ -51,7 +60,14 @@ export default function BeachFlipCard({ beach }) {
             />
             <div className={styles.mediaBadges}>
               <StatusBadge status={beach.status} />
-              {beach.dataStatus === 'demo' && <span className={styles.demoBadge}>Demo Data</span>}
+              {dataBadge && (
+                <span
+                  className={`${styles.demoBadge} ${dataBadge.broken ? styles.brokenBadge : styles.liveBadge}`}
+                  title={beach.liveDataError || 'Weather, UV and water temperature are live from Open-Meteo. Rip current and red tide are demo data.'}
+                >
+                  {dataBadge.text}
+                </span>
+              )}
             </div>
           </div>
 
@@ -120,6 +136,10 @@ export default function BeachFlipCard({ beach }) {
               </div>
             </div>
 
+            {beach.liveDataError && (
+              <p className={styles.liveError} role="alert">⚠ {beach.liveDataError}</p>
+            )}
+
             <div className={styles.risks}>
               <span className={`${styles.riskBadge} ${riskColor[beach.ripCurrentRisk] || ''}`}>
                 Rip Current: {beach.ripCurrentRisk ?? '—'}
@@ -128,6 +148,7 @@ export default function BeachFlipCard({ beach }) {
                 Red Tide: {beach.redTideStatus ?? '—'}
               </span>
             </div>
+            <p className={styles.demoNote}>Rip current &amp; red tide are demo data — not live.</p>
 
             <BeachScore score={beach.beachScore} />
 

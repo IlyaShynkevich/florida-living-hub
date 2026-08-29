@@ -9,11 +9,11 @@ import styles from './BeachDetailPage.module.css'
 
 export default function BeachDetailPage() {
   const { id } = useParams()
-  const { data: beach, loading, error } = useFetch(apiUrl(`/api/beaches/${id}`))
+  const { data: beach, meta, loading, error } = useFetch(apiUrl(`/api/beaches/${id}`))
 
   return (
     <div className={styles.page}>
-      <SafetyDisclaimer />
+      <SafetyDisclaimer liveData={meta?.liveData} />
       {loading && <LoadingState message="Loading beach details..." />}
       {error && <ErrorState message={`Could not load beach: ${error}`} />}
       {beach && <BeachDetails beach={beach} />}

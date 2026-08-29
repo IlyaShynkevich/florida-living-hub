@@ -10,13 +10,13 @@ A Gulf Coast beach-day planner that helps locals and visitors choose the right F
 
 ### Beach Planner
 - **Beach Finder** — browse 17 Gulf Coast beaches grouped by region with filters
-- **Beach Conditions** — per-beach demo conditions: air/water temp, wind speed, UV index, rip current risk, red tide status
+- **Beach Conditions** — per-beach **live** air/water temperature, wind speed, UV index and weather condition (Open-Meteo), plus **demo** rip current risk and red tide status
 - **Beach Day Score** — 0–100 score calculated from safety and comfort factors
 - **Safety Status** — Go / Caution / Avoid per beach, derived from the same score
-- **Best Time To Go** — recommended visit window based on UV and heat (demo logic)
+- **Best Time To Go** — recommended visit window based on live UV and heat
 - **Parking & Access** — parking difficulty rating, arrival tip, and directions per beach
 - **Nearby Food & Activities** — curated suggestions with auto-detected icons
-- **Safety Disclaimer** — visible demo data label and official advisory reminder on all condition pages
+- **Safety Disclaimer** — visible live-vs-demo provenance label, live-feed health indicator, and official advisory reminder on all condition pages
 
 ### Utility Calculator
 - Rough monthly estimate for electricity, water, and internet costs
@@ -196,14 +196,22 @@ Florida Living Hub/
 
 ## Data Notice
 
-All beach condition data and utility estimates are **demo/mock data** for MVP demonstration purposes only. No live APIs are connected. Do not use for real safety decisions — always check official local sources and posted beach flags before swimming.
+Beach **weather is live**. Air temperature, water temperature, wind speed, UV index and weather condition are fetched server-side from the [Open-Meteo](https://open-meteo.com) forecast and marine APIs and refreshed every 20 minutes (configurable via `WEATHER_REFRESH_MINUTES`). All 17 beaches are covered by two batched requests per refresh — roughly 144 calls/day.
+
+> **Licensing:** the Open-Meteo free tier is **non-commercial only** and limited to about 10,000 calls/day. A paid Open-Meteo plan (or an equivalent licensed provider) is required before any commercial launch.
+
+**Rip current risk, red tide status and all utility estimates are still demo/mock data** and are not connected to any feed.
+
+If the Open-Meteo pipeline fails it is never silently replaced with defaults. The failure is logged with a `[weather] ERROR` prefix, exposed in `meta.liveData` on `/api/beaches`, returned as HTTP 503 from `/api/live-data-status`, and shown in the in-app disclaimer banner. Missing values render as `—`, never as estimates.
+
+Do not use any of this for real safety decisions — always check official local sources and posted beach flags before swimming.
 
 ---
 
 ## Roadmap
 
 ### Beach Planner — Coming Soon
-- Live weather and NOAA data replacing demo conditions
+- NOAA rip current and red tide feeds replacing the last demo condition fields
 - Interactive Gulf Coast beach map
 - East Coast and South Florida regions
 - Crowd and parking condition indicators

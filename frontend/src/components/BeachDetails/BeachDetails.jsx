@@ -45,13 +45,17 @@ export default function BeachDetails({ beach }) {
       <section className={`${styles.section} ${styles.recSection}`}>
         <div className={styles.recHeader}>
           <h2 className={styles.sectionTitle}>Beach Day Recommendation</h2>
-          <span className={styles.demoTag}>Demo Data</span>
+          <span className={styles.demoTag}>Live weather + demo safety data</span>
         </div>
 
         <div className={styles.recTop}>
           <div className={styles.recScoreBlock}>
-            <span className={`${styles.recScoreNum} ${styles[`score${rec.label}`]}`}>{rec.score}</span>
-            <span className={styles.recScoreOf}>/100</span>
+            {/* rec.score is null when live weather was unavailable — show "—",
+                never an incomplete number that reads as a real score. */}
+            <span className={`${styles.recScoreNum} ${styles[`score${rec.label}`]}`}>
+              {rec.score ?? '—'}
+            </span>
+            {rec.score != null && <span className={styles.recScoreOf}>/100</span>}
           </div>
           <div className={styles.recMain}>
             <span className={`${styles.recLabelBadge} ${styles[`badge${rec.label}`]}`}>{rec.label}</span>
@@ -72,7 +76,7 @@ export default function BeachDetails({ beach }) {
         )}
 
         <p className={styles.recFooter}>
-          This is decision-support information based on demo data — not a safety guarantee. Always check official local warnings before swimming and follow posted beach flags.
+          This score combines live weather from Open-Meteo with <strong>demo</strong> rip current and red tide values. It is decision-support information — not a safety guarantee. Always check official local warnings before swimming and follow posted beach flags.
         </p>
       </section>
 
@@ -84,7 +88,10 @@ export default function BeachDetails({ beach }) {
 
       <div className={styles.grid}>
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Weather Conditions</h2>
+          <div className={styles.recHeader}>
+            <h2 className={styles.sectionTitle}>Weather Conditions</h2>
+            <span className={styles.demoTag}>Live · Open-Meteo</span>
+          </div>
           <ul className={styles.detailList}>
             <li><span>Condition</span><strong>{beach.weatherCondition ?? '—'}</strong></li>
             <li><span>Air Temperature</span><strong>{beach.airTemperature ?? '—'}°F</strong></li>
@@ -92,10 +99,18 @@ export default function BeachDetails({ beach }) {
             <li><span>Wind Speed</span><strong>{beach.windSpeed ?? '—'} mph</strong></li>
             <li><span>UV Index</span><strong>{beach.uvIndex ?? '—'}</strong></li>
           </ul>
+          {beach.liveDataError && (
+            <div className={styles.cautionBox} role="alert">
+              ⚠️ {beach.liveDataError} Values above are shown as “—” rather than estimated.
+            </div>
+          )}
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Safety Information</h2>
+          <div className={styles.recHeader}>
+            <h2 className={styles.sectionTitle}>Safety Information</h2>
+            <span className={styles.demoTag}>Demo data</span>
+          </div>
           <ul className={styles.detailList}>
             <li>
               <span>Rip Current Risk</span>
@@ -195,12 +210,24 @@ export default function BeachDetails({ beach }) {
       <section className={`${styles.section} ${styles.disclaimerSection}`}>
         <h2 className={`${styles.sectionTitle} ${styles.disclaimerTitle}`}>⚠️ Safety Disclaimer</h2>
         <p className={styles.disclaimerText}>
-          All beach condition data on this page is <strong>demo / illustrative data</strong> and is not connected to any live feed. It does not reflect current real-world conditions.
+          Condition data on this page comes from two different places.{' '}
+          <strong>Air and water temperature, wind, UV index and weather condition are live</strong>,
+          fetched from the Open-Meteo forecast and marine APIs
+          {beach.conditionsObservedAt ? ` (observation time ${beach.conditionsObservedAt.replace('T', ' ')} local)` : ''}.{' '}
+          <strong>Rip current risk and red tide status are demo / illustrative data</strong> — they
+          are not connected to any live feed and do not reflect current real-world conditions.
         </p>
+        {beach.liveDataError && (
+          <p className={styles.disclaimerText} role="alert">
+            <strong>⚠ Live weather is currently unavailable for this beach.</strong> {beach.liveDataError}{' '}
+            Missing values are shown as “—” rather than filled in with estimates.
+          </p>
+        )}
         <ul className={styles.disclaimerList}>
           <li>Always check official local sources before swimming or visiting.</li>
           <li>Observe posted beach safety flags and follow lifeguard instructions.</li>
-          <li>Rip current and red tide data shown here may not be accurate for today.</li>
+          <li>Rip current and red tide data shown here is demo data and is not accurate for today.</li>
+          <li>Live weather is a forecast model output, not an on-site measurement.</li>
           <li>This page does not guarantee beach safety. Use your own judgment.</li>
         </ul>
       </section>

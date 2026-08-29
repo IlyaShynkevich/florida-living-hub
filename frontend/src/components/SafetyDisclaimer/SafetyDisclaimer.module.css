@@ -48,6 +48,17 @@
   background: #e65100;
   flex-shrink: 0;
   animation: pulse 2s ease-in-out infinite;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+/* green = live feed healthy, red = feed stale or down */
+.dotLive   { background: #2e7d32; }
+.dotBroken { background: #c62828; }
+
+.dataStatusBroken .statusText {
+  color: #b71c1c;
+  font-weight: 600;
 }
 
 .statusText {

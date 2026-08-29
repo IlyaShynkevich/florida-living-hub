@@ -1,6 +1,7 @@
 /**
  * Decision-support only. Returns a recommended time window for a beach visit
- * based on UV, heat, and weather. Uses demo data — not live conditions.
+ * based on UV, heat, and weather. These inputs are live (Open-Meteo, via the
+ * beach API) — but this is guidance, not an official advisory.
  * heatRisk ('Low' | 'Moderate' | 'High' | 'Extreme') comes from the beach API
  * response, which is the single source of truth (see backend/src/utils/beachScore.js)
  * so this stays in sync with the Beach Day Score.
