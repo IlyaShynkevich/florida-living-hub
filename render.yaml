@@ -1,0 +1,38 @@
+# Render blueprint — backend only.
+#
+#   florida-living-hub-api : Express backend (Node web service)
+#
+# The frontend is NOT deployed here — it is hosted on Vercel (see the
+# Deployment section in README.md and frontend/vercel.json).
+#
+# No secret values live in this file. Every var marked `sync: false` must be
+# filled in from the Render dashboard (or via an env group) at deploy time.
+# Render injects PORT automatically; the backend reads it via process.env.PORT.
+
+services:
+  - type: web
+    name: florida-living-hub-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    # `/` returns 200 JSON unconditionally. Do NOT point the health check at
+    # /api/live-data-status — that endpoint returns 503 by design when the
+    # Open-Meteo feed is stale, which would make Render cycle a healthy server.
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Comma-separated list of allowed frontend origins — the Vercel
+      # deployment URL, e.g. https://florida-living-hub.vercel.app
+      # Required in production: the server throws at boot if it is unset.
+      - key: CORS_ORIGINS
+        sync: false
+      # Optional Open-Meteo tuning; the service defaults to 20 / 15000 / 2.
+      # - key: WEATHER_REFRESH_MINUTES
+      #   value: "20"
+      # - key: WEATHER_TIMEOUT_MS
+      #   value: "15000"
+      # - key: WEATHER_RETRY_MINUTES
+      #   value: "2"

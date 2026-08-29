@@ -40,9 +40,9 @@ A Gulf Coast beach-day planner that helps locals and visitors choose the right F
 ## Setup & Running
 
 ### Prerequisites
-- Node.js 18+
+- Node.js 20+ (pinned via `engines` in both `package.json` files)
 - npm
-- No `.env` files required to run the app — all data is mock JSON included in the repo.
+- No `.env` files required **for local dev** — the backend defaults to port 3001 and allows `http://localhost:5173`, and the frontend proxies `/api` through Vite. **Production is different:** both services need environment variables set on the hosting platform — see [Deployment](#deployment).
   An optional root `.env` with `PEXELS_API_KEY` is only used by a one-off local script for sourcing beach photos, not by the app itself.
 
 ### 1. Clone the repo
@@ -79,6 +79,39 @@ npm run dev
 ```
 
 Then open **http://localhost:5173** in your browser.
+
+---
+
+## Deployment
+
+Deployed as two separate services:
+
+| Part     | Host   | Root directory | Build           | Serve           |
+|----------|--------|----------------|-----------------|-----------------|
+| Backend  | Render | `backend`      | `npm ci`        | `npm start`     |
+| Frontend | Vercel | `frontend`     | `npm run build` | static `dist/`  |
+
+The backend is described by [`render.yaml`](render.yaml) at the repo root, so Render can provision it as a blueprint rather than by hand. Render assigns `PORT` automatically — the server reads it and falls back to 3001 locally.
+
+### Required environment variables
+
+Set these on the hosting platform, not in a committed file. Both files are documented in full — with formats and examples — in [`backend/.env.example`](backend/.env.example) and [`frontend/.env.example`](frontend/.env.example).
+
+| Variable            | Service  | Required | Notes                                                                  |
+|---------------------|----------|----------|------------------------------------------------------------------------|
+| `NODE_ENV`          | Backend  | Yes      | Set to `production`. Disables the automatic localhost CORS allowance.   |
+| `CORS_ORIGINS`      | Backend  | Yes      | Comma-separated allowed frontend origins, e.g. the Vercel URL.         |
+| `VITE_API_BASE_URL` | Frontend | Yes      | Public origin of the Render backend, no trailing slash.                |
+| `WEATHER_*`         | Backend  | No       | Open-Meteo refresh/timeout/retry tuning. Defaults are fine.            |
+
+Two things worth knowing:
+
+- **`CORS_ORIGINS` has no production default.** With `NODE_ENV=production` the server throws at startup if it is empty, rather than booting and failing later as an opaque browser CORS error. A deploy that fails here means the variable is missing.
+- **`VITE_API_BASE_URL` is baked into the bundle at build time**, not read at runtime. Changing it needs a rebuild, not just a restart.
+
+### Health checks
+
+Point platform health checks and uptime monitors at `/`, which returns 200 unconditionally. Do **not** use `/api/live-data-status` — it returns 503 by design when the weather feed goes stale, which would make the platform restart an otherwise healthy server.
 
 ---
 
