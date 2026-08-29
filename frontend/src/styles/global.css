@@ -60,6 +60,14 @@
   --maxw-read: 720px;
   --section-y: clamp(3.5rem, 7vw, 6rem);
   --gutter:    clamp(1.25rem, 4vw, 2rem);
+
+  /* --- Tap feedback ---
+     All press movement is expressed as scale(var(--tap-press|--tap-sink)), so
+     the reduced-motion block can neutralise every one of them by setting the
+     two tokens to 1 — no !important, and nothing else has to change. */
+  --tap-dur:   90ms;
+  --tap-press: 0.97;   /* buttons, pills, links */
+  --tap-sink:  0.985;  /* large surfaces: cards */
 }
 
 html {
@@ -67,6 +75,9 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  /* Kill the default blue/grey tap flash. Every interactive element gets a
+     brand-coloured :active state instead — see "Tap feedback" below. */
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -182,9 +193,35 @@ img { max-width: 100%; }
   }
 }
 
+/* ---- Tap feedback baseline ----
+   Catches any interactive element without a bespoke :active rule below.
+
+   Each rule pairs the property it changes with a transition for THAT property
+   only. An earlier version set a bare `transition-duration` here, which is a
+   blunt instrument: :where() contributes 0 specificity but :active contributes
+   (0,1,0), so the rule tied with component selectors like `.inner` and won on
+   source order — silently retiming their own animations. That shortened the
+   flip card's 0.55s rotation to 90ms for as long as a finger was down, which
+   read as the flip snapping on touch devices while looking fine with a mouse
+   (mouseup clears :active before click, so the desktop path never hit it).
+
+   [role="button"] is excluded on purpose. The two in this app — the flip card
+   inner and the feature card — both own their transform and their own :active
+   rule, so the baseline has nothing to add and everything to break. */
+:where(a):active {
+  opacity: 0.72;
+  transition: opacity var(--tap-dur) ease;
+}
+:where(button, summary):active {
+  transform: scale(var(--tap-press));
+  transition: transform var(--tap-dur) ease;
+}
+
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  /* Presses keep their colour/opacity shift but lose the movement. */
+  :root { --tap-press: 1; --tap-sink: 1; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

@@ -9,10 +9,12 @@
 }
 
 .clickable { cursor: pointer; }
-.clickable:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-  border-color: rgba(23,162,184,0.35);
+@media (hover: hover) {
+  .clickable:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(23,162,184,0.35);
+  }
 }
 .clickable:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 
@@ -46,3 +48,12 @@
   font-weight: 700;
   color: var(--coral-strong);
 }
+
+/* ---- Tap feedback ---- */
+.clickable { transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+.clickable:active {
+  transform: scale(var(--tap-sink));
+  border-color: rgba(226,89,63,0.45);
+  transition-duration: var(--tap-dur);
+}
+.clickable:active .cta { color: var(--coral); }

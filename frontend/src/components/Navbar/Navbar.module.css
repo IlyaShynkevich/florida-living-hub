@@ -125,3 +125,16 @@
 @media (min-width: 761px) and (max-width: 900px) {
   .ctaBtn { display: none; }
 }
+
+/* ---- Tap feedback ---- */
+.brand { transition: opacity var(--tap-dur) ease; }
+.brand:active { opacity: 0.72; }
+
+.navLinks a:active,
+.plain:active { background: rgba(255,255,255,0.26); opacity: 1; }
+
+.ctaBtn:active {
+  transform: scale(var(--tap-press));
+  background: var(--sand);
+  transition-duration: var(--tap-dur);
+}

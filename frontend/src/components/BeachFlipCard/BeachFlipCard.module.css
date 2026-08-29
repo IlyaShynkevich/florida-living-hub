@@ -7,7 +7,9 @@
   max-width: 100%;
   transition: transform 0.2s ease;
 }
-.card:hover { transform: translateY(-5px); }
+@media (hover: hover) {
+  .card:hover { transform: translateY(-5px); }
+}
 
 /* Inner rotates; both faces are stacked in the same grid cell so the
    card sizes to the taller side and neither face ever clips. */
@@ -35,9 +37,18 @@
   box-shadow: var(--shadow);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+
+  /* Which face this is (rotateY) and the press scale must live in ONE
+     transform value. As separate rules they overwrite instead of composing:
+     .inner:active .face (0,3,0) beat .back (0,1,0) and flattened the back
+     face mid-flip, which read as a flicker. Tokens compose them instead. */
+  --face-rot: 0deg;
+  --face-press: 1;
+  transform: rotateY(var(--face-rot)) scale(var(--face-press));
+  transition: transform var(--tap-dur) ease, box-shadow var(--tap-dur) ease;
 }
 .card:hover .face { box-shadow: var(--shadow-hover); }
-.back { transform: rotateY(180deg); }
+.back { --face-rot: 180deg; }
 
 .Go .face      { border-top-color: var(--green); }
 .Caution .face { border-top-color: var(--yellow); }
@@ -215,4 +226,24 @@
   }
   .footer { padding-top: 0.35rem; }
   .flipHint { font-size: 0.75rem; padding-block: 6px; }
+}
+
+/* ---- Tap feedback ----
+   Only the scale token changes; the rotation token is untouched, so a face
+   keeps facing the right way while it presses. --tap-sink becomes 1 under
+   prefers-reduced-motion, which removes the movement without touching this. */
+.inner:active .face {
+  --face-press: var(--tap-sink);
+  /* The scale is the whole press cue, and --tap-sink flattens it to 1 under
+     prefers-reduced-motion — which would leave those users with no feedback at
+     all. The shadow tightening is not motion, so it survives and still reads
+     as "pressed into the page". */
+  box-shadow: 0 1px 3px rgba(9,42,74,0.16);
+}
+
+.detailsLink { transition: color var(--tap-dur) ease, transform var(--tap-dur) ease; }
+.detailsLink:active {
+  color: var(--coral);
+  transform: scale(var(--tap-press));
+  opacity: 1;
 }

@@ -138,3 +138,18 @@
     padding: 0 1rem;
   }
 }
+
+/* ---- Tap feedback ---- */
+.filterBtn:active {
+  transform: scale(var(--tap-press));
+  background: var(--blue-light);
+  border-color: var(--blue);
+  color: var(--blue-dark);
+  transition-duration: var(--tap-dur);
+}
+/* the selected pill is already navy — deepen rather than lighten it */
+.filterBtn.active:active {
+  background: var(--ocean-900);
+  border-color: var(--ocean-900);
+  color: var(--white);
+}

@@ -78,3 +78,12 @@
   .label { font-size: 0.68rem; letter-spacing: 0; }
   .tab   { padding: 7px 2px 9px; gap: 2px; }
 }
+
+/* ---- Tap feedback ----
+   Coral is the site's action colour, so a tab answers a press by warming to it
+   while its icon dips. Declared outside the media query for simplicity; .bar is
+   display:none above 760px, so these can never apply on desktop. */
+.tab { transition: color var(--tap-dur) ease; }
+.tab:active { color: var(--coral-strong); opacity: 1; }
+.icon { transition: transform var(--tap-dur) ease; }
+.tab:active .icon { transform: scale(var(--tap-press)); }

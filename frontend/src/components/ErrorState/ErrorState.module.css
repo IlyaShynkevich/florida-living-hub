@@ -16,3 +16,9 @@
 }
 
 .retry:hover { background: var(--coral); transform: translateY(-1px); }
+
+/* ---- Tap feedback ---- */
+.retry:active {
+  transform: scale(var(--tap-press));
+  transition-duration: var(--tap-dur);
+}
