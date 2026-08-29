@@ -119,3 +119,22 @@
     max-width: 100%;
   }
 }
+
+@media (max-width: 660px) {
+  /* The filter row is a deliberate horizontal scroll strip. Give the pills a
+     44px hit box, momentum scrolling, and gutter padding so the first and last
+     pill are not flush against the screen edge. */
+  .filters {
+    gap: 0.45rem;
+    padding-inline: 1px;
+    scroll-padding-inline: 1rem;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .filterBtn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 1rem;
+  }
+}

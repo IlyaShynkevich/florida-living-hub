@@ -51,7 +51,12 @@
   --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
 
   /* --- Layout & rhythm --- */
-  --maxw:      1120px;
+  /* 1120px through laptop widths, then ramps with the viewport up to 1320px so
+     large monitors are not left with ~400px of dead margin either side.
+     Below 1600px, 70vw is under the 1120px floor, so the clamp holds it there —
+     the measure grows continuously instead of snapping at a breakpoint.
+     Card grids keep their column count and let the cards themselves breathe. */
+  --maxw:      clamp(1120px, 70vw, 1320px);
   --maxw-read: 720px;
   --section-y: clamp(3.5rem, 7vw, 6rem);
   --gutter:    clamp(1.25rem, 4vw, 2rem);
@@ -70,6 +75,7 @@ body {
   color: var(--text-dark);
   line-height: 1.6;
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -82,12 +88,17 @@ h1, h2, h3 {
   font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.015em;
+  /* body's 1.6 is a reading measure, not a display one — headings that wrap
+     to two or three lines on a phone were drifting far apart. Components that
+     set their own line-height still win (class beats element). */
+  line-height: 1.2;
 }
 
 .app-wrapper {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
 }
 
@@ -123,7 +134,7 @@ img { max-width: 100%; }
   align-items: center;
   gap: 0.55rem;
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -180,3 +191,18 @@ img { max-width: 100%; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---- Mobile touch floor ----
+   Fingers need ~44px. Applied as min-height on the interactive elements that
+   measured smaller at 375px, without changing their visual weight. */
+@media (max-width: 760px) {
+  .shell { padding-left: max(var(--gutter), env(safe-area-inset-left, 0px)); padding-right: max(var(--gutter), env(safe-area-inset-right, 0px)); }
+}
+
+@media (max-width: 480px) {
+  /* 0.16em tracking pushes the kicker onto a second line at 375px and strands
+     a single word. Tighten it just enough to hold one line. */
+  .eyebrow { letter-spacing: 0.1em; gap: 0.45rem; }
+  .eyebrow::before { width: 20px; }
+}
+

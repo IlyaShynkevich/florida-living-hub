@@ -46,13 +46,22 @@
   .tab.active { color: var(--blue-dark); }
   .tab.active::before { opacity: 1; }
 
+  /* SVG line icons — sized explicitly rather than by font-size. `display: block`
+     keeps the inline text baseline from adding a phantom gap under the glyph. */
   .icon {
-    font-size: 1.4rem;
-    line-height: 1;
+    width: 22px;
+    height: 22px;
+    display: block;
+    flex-shrink: 0;
+    overflow: visible;
   }
 
+  /* the active tab already changes colour and shows the top rule; a slightly
+     heavier stroke keeps the icon from reading lighter than its label */
+  .tab.active .icon { stroke-width: 2.3; }
+
   .label {
-    font-size: 0.68rem;
+    font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.01em;
     white-space: nowrap;
@@ -63,6 +72,9 @@
 }
 
 @media (max-width: 375px) {
-  .icon  { font-size: 1.2rem; }
-  .label { font-size: 0.6rem; }
+  /* 5 tabs across 375px: keep the label legible rather than shrinking it
+     to 9.6px, and let the icon give back the vertical room. */
+  .icon  { width: 20px; height: 20px; }
+  .label { font-size: 0.68rem; letter-spacing: 0; }
+  .tab   { padding: 7px 2px 9px; gap: 2px; }
 }

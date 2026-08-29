@@ -1,5 +1,7 @@
-.page { max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
-
-@media (max-width: 660px) {
-  .page { padding: 1.5rem 1rem; }
+/* padding follows the shared fluid gutter (clamp 1.25rem–2rem) instead of a
+   fixed 2rem, so the page tracks the rest of the site as the window resizes */
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 2.5rem) var(--gutter);
 }
