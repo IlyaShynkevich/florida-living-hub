@@ -45,3 +45,7 @@
   }
   .copy { font-size: 0.8rem; line-height: 1.5; }
 }
+
+/* ---- Tap feedback ---- */
+.links a { transition: color var(--tap-dur) ease; }
+.links a:active { color: var(--coral); opacity: 1; }

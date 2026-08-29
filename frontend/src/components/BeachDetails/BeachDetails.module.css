@@ -329,3 +329,11 @@
   .recHeader { flex-wrap: wrap; gap: 0.4rem 0.6rem; }
   .demoTag { white-space: normal; }
 }
+
+/* ---- Tap feedback ---- */
+.back:active {
+  transform: scale(var(--tap-press));
+  background: var(--blue-light);
+  border-color: var(--blue);
+  transition-duration: var(--tap-dur);
+}

@@ -281,3 +281,17 @@
   /* phase + state chips wrap rather than compressing the heading beside them */
   .nodePhaseRow { flex-wrap: wrap; gap: 0.4rem 0.6rem; }
 }
+
+/* ---- Tap feedback ---- */
+.ctaPrimary:active {
+  transform: scale(var(--tap-press));
+  background: var(--coral-strong);
+  box-shadow: 0 4px 12px rgba(199,68,43,0.42);
+  transition-duration: var(--tap-dur);
+}
+.ctaSecondary:active {
+  transform: scale(var(--tap-press));
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.8);
+  transition-duration: var(--tap-dur);
+}
