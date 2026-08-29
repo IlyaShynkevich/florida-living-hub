@@ -1,7 +1,7 @@
 import styles from './AboutPage.module.css'
 
 const beachSoon = [
-  'Real-time weather and NOAA data replacing demo conditions',
+  'NOAA rip current and red tide feeds replacing the last demo fields',
   'Interactive Gulf Coast beach map with condition overlays',
   'East Coast and South Florida beach regions',
   'Crowd and parking condition indicators',
@@ -88,9 +88,11 @@ export default function AboutPage() {
         <section className={styles.section}>
           <h2>Data Notice</h2>
           <p>
-            This MVP uses demo data for illustration purposes. All beach conditions and utility
-            estimates are not live and should not be used for safety decisions. Always check
-            official local sources and posted beach flags before swimming.
+            Beach weather is live: air temperature, water temperature, wind speed, UV index and
+            weather condition come from the Open-Meteo forecast and marine APIs, refreshed on the
+            server every 20 minutes. Rip current risk, red tide status and the utility cost
+            estimates are still demo data and are not live. Nothing here should be used for safety
+            decisions — always check official local sources and posted beach flags before swimming.
           </p>
         </section>
       </div>

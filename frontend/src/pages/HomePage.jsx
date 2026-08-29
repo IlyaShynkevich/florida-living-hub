@@ -5,8 +5,8 @@ import styles from './HomePage.module.css'
 
 const features = [
   { icon: '🏖️', title: 'Gulf Coast Beach Finder', description: '17 Gulf Coast beaches with conditions, scores, and local tips to help you pick the right one.', to: '/beach-finder' },
-  { icon: '🌤️', title: 'Weather & UV Info', description: 'UV index, wind speed, water temp, and weather conditions per beach — demo data, clearly labeled.', to: '/beach-finder' },
-  { icon: '⚠️', title: 'Safety Conditions', description: 'Rip current risk and red tide status per beach. Demo data — always verify with official local sources before swimming.', to: '/beach-finder' },
+  { icon: '🌤️', title: 'Weather & UV Info', description: 'Live UV index, wind speed, air and water temperature per beach, refreshed from Open-Meteo.', to: '/beach-finder' },
+  { icon: '⚠️', title: 'Safety Conditions', description: 'Rip current risk and red tide status per beach. Still demo data — always verify with official local sources before swimming.', to: '/beach-finder' },
   { icon: '🏠', title: 'Utility Cost Calculator', description: 'Estimate monthly electricity, water, and internet costs for Florida cities. Demo estimates only.', to: '/calculator' },
 ]
 
@@ -17,7 +17,7 @@ const timeline = [
     state: 'live',
     heading: 'Gulf Coast beach planner',
     items: [
-      'Conditions & Beach Day Score for 17 Gulf Coast beaches',
+      'Live weather, UV and water temperature for 17 Gulf Coast beaches',
       'Best Time To Go guidance and parking difficulty per beach',
       'Monthly utility cost estimator for Florida cities',
     ],
@@ -27,7 +27,7 @@ const timeline = [
     state: 'soon',
     heading: 'Deeper, live beach data',
     items: [
-      'Real-time weather & NOAA data replacing demo conditions',
+      'NOAA rip current & red tide feeds replacing the last demo fields',
       'Interactive Gulf Coast beach map with condition overlays',
       'East Coast and South Florida beach regions',
     ],

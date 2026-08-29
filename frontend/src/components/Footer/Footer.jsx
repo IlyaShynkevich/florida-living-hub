@@ -21,7 +21,9 @@ export default function Footer() {
           <Link to="/about">About</Link>
           <a href="/about#roadmap">Roadmap</a>
         </nav>
-        <p className={styles.copy}>All condition and utility data is demo only — not live.</p>
+        <p className={styles.copy}>
+          Weather, UV and water temperature are live from Open-Meteo. Rip current, red tide and utility data are demo only.
+        </p>
         <p className={styles.copy}>© {new Date().getFullYear()} Florida Living Hub</p>
       </div>
     </footer>

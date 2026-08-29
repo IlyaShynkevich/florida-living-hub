@@ -23,7 +23,7 @@ function getGroup(beach) {
 }
 
 export default function BeachFinderPage() {
-  const { data: beaches, loading, error } = useFetch(apiUrl('/api/beaches'))
+  const { data: beaches, meta, loading, error } = useFetch(apiUrl('/api/beaches'))
   const [activeFilter, setActiveFilter] = useState('all')
 
   const visible = beaches
@@ -64,7 +64,7 @@ export default function BeachFinderPage() {
         ))}
       </div>
 
-      <SafetyDisclaimer />
+      <SafetyDisclaimer liveData={meta?.liveData} />
 
       {loading && <LoadingState message="Loading beaches..." />}
       {error && <ErrorState message={`Could not load beach data: ${error}`} />}

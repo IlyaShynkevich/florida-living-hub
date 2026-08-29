@@ -3,6 +3,14 @@
  * Returns a 0–100 score, a Go/Caution/Avoid label, an explanation,
  * a list of warning reasons, and a list of positive reasons.
  *
+ * Inputs are mixed-provenance: uvIndex, airTemperature, windSpeed and
+ * weatherCondition are LIVE (Open-Meteo, via services/weatherService.js), while
+ * ripCurrentRisk and redTideStatus are still demo/mock values.
+ *
+ * When a live weather input is missing (null), it is NOT defaulted — the factor
+ * is skipped, a visible warning is added, and the label is capped at "Caution"
+ * so a partial score is never presented as a confident "Go".
+ *
  * This does NOT guarantee beach safety. Always check official local
  * conditions before visiting.
  */
@@ -71,7 +79,7 @@ function calculateBeachScore(beach) {
   } else if (uvIndex >= 8) {
     score -= 6;
     warnings.push("High UV index — sunscreen and hat recommended, especially 10 am – 4 pm.");
-  } else if (uvIndex !== undefined && uvIndex <= 5) {
+  } else if (uvIndex != null && uvIndex <= 5) {
     positives.push("Mild UV levels.");
   }
 
@@ -96,7 +104,7 @@ function calculateBeachScore(beach) {
   } else if (windSpeed >= 15) {
     score -= 4;
     warnings.push("Moderate wind — some chop in the water.");
-  } else if (windSpeed !== undefined && windSpeed < 10) {
+  } else if (windSpeed != null && windSpeed < 10) {
     positives.push("Light winds — calm water conditions.");
   }
 
@@ -110,12 +118,19 @@ function calculateBeachScore(beach) {
     positives.push("Parking is relatively easy to find.");
   }
 
+  // --- Missing live inputs (never silently defaulted) ---
+  const missingLive = [];
+  if (airTemperature == null) missingLive.push("air temperature");
+  if (uvIndex == null) missingLive.push("UV index");
+  if (windSpeed == null) missingLive.push("wind speed");
+  if (weatherCondition == null) missingLive.push("weather condition");
+
   score = Math.max(0, Math.min(100, Math.round(score)));
 
   let label, explanation;
   if (score >= 70) {
     label = "Go";
-    explanation = "Conditions look favorable for a beach day based on demo data. Confirm with official local sources before going.";
+    explanation = "Conditions look favorable for a beach day based on live weather plus demo rip current / red tide data. Confirm with official local sources before going.";
   } else if (score >= 40) {
     label = "Caution";
     explanation = "One or more factors warrant attention. Review the warnings below and check official local advisories.";
@@ -124,7 +139,33 @@ function calculateBeachScore(beach) {
     explanation = "Significant risks make this a poor candidate for a beach day. Check official local conditions before visiting.";
   }
 
-  return { score, label, explanation, warnings, positives, parkingDifficulty, heatRisk };
+  if (missingLive.length > 0) {
+    // Live weather is missing for this beach. Those factors were skipped rather
+    // than defaulted, so the score is incomplete — say so loudly and refuse to
+    // present it as a confident "Go".
+    warnings.unshift(
+      `Live weather data unavailable (${missingLive.join(", ")}) — this score does not reflect current conditions. Check official local forecasts before going.`
+    );
+    if (label === "Go") {
+      label = "Caution";
+      explanation = "Live weather could not be retrieved, so this score is incomplete. Check official local forecasts and advisories before going.";
+    }
+    // Null the number rather than publish it. Skipped factors deduct nothing, so
+    // a partial score reads misleadingly high (e.g. "100" next to "Caution").
+    // Callers render null as "—". The label still carries the verdict.
+    score = null;
+  }
+
+  return {
+    score,
+    label,
+    explanation,
+    warnings,
+    positives,
+    parkingDifficulty,
+    heatRisk,
+    missingLiveInputs: missingLive,
+  };
 }
 
 /**

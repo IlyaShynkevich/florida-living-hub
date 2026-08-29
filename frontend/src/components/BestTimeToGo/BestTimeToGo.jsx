@@ -10,7 +10,7 @@ export default function BestTimeToGo({ uvIndex, heatRisk, weatherCondition }) {
     <section className={`${styles.card} ${styles[result.severity]}`} data-severity={result.severity}>
       <div className={styles.header}>
         <h2 className={styles.title}>Best Time To Go</h2>
-        <span className={styles.demoTag}>Demo guidance</span>
+        <span className={styles.demoTag}>Based on live UV &amp; temperature</span>
       </div>
 
       <div className={styles.windowRow}>
@@ -26,7 +26,7 @@ export default function BestTimeToGo({ uvIndex, heatRisk, weatherCondition }) {
       </div>
 
       <p className={styles.footer}>
-        Demo guidance based on UV and temperature data — not a live forecast. Verify conditions before visiting.
+        Guidance derived from live Open-Meteo UV and temperature values — not an official advisory. Verify conditions before visiting.
       </p>
     </section>
   )

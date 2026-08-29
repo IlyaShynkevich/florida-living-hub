@@ -10,6 +10,14 @@
 .high { color: var(--green); }
 .mid  { color: var(--amber-text); }
 .low  { color: var(--red); }
+.unscored { color: var(--text-light); }
+
+.unscoredNote {
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  color: #b71c1c;
+  font-weight: 600;
+}
 
 .bar  { height: 6px; background: var(--sand-dark); border-radius: 3px; overflow: hidden; }
 
@@ -17,3 +25,4 @@
 .fill.high { background: var(--green); }
 .fill.mid  { background: var(--yellow); }
 .fill.low  { background: var(--red); }
+.fill.unscored { background: transparent; }
