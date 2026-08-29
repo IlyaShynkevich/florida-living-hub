@@ -10,7 +10,7 @@ A Gulf Coast beach-day planner that helps locals and visitors choose the right F
 
 ### Beach Planner
 - **Beach Finder** — browse 17 Gulf Coast beaches grouped by region with filters
-- **Beach Conditions** — per-beach **live** air/water temperature, wind speed, UV index and weather condition (Open-Meteo), plus **demo** rip current risk and red tide status
+- **Beach Conditions** — per-beach air temperature, water temperature, wind speed, UV index and weather condition are **live from [Open-Meteo](https://open-meteo.com)**, refreshed server-side every ~20 minutes; rip current risk and red tide status remain **demo/mock data**
 - **Beach Day Score** — 0–100 score calculated from safety and comfort factors
 - **Safety Status** — Go / Caution / Avoid per beach, derived from the same score
 - **Best Time To Go** — recommended visit window based on live UV and heat
@@ -101,11 +101,36 @@ Mobile bottom nav (≤760px): **Home | Beaches | Utility | About | Roadmap**
 
 ## API Routes
 
-| Method | Route                   | Description              |
-|--------|-------------------------|--------------------------|
-| GET    | `/api/beaches`          | All beaches with scores  |
-| GET    | `/api/beaches/:id`      | Single beach details     |
-| POST   | `/api/utility-estimate` | Monthly utility estimate |
+| Method | Route                    | Description                              |
+|--------|--------------------------|------------------------------------------|
+| GET    | `/api/beaches`           | All beaches with live conditions + scores |
+| GET    | `/api/beaches/:id`       | Single beach details                     |
+| GET    | `/api/live-data-status`  | Health of the Open-Meteo live feed       |
+| POST   | `/api/utility-estimate`  | Monthly utility estimate                 |
+
+### GET `/api/live-data-status`
+
+Health check for the live weather pipeline. Returns **200** while the feed is healthy and **503** when it is `stale` or `unavailable`, so an uptime monitor catches a silent break without polling `/api/beaches`.
+
+```json
+{
+  "success": true,
+  "data": {
+    "status": "live",
+    "source": "Open-Meteo",
+    "licence": "Open-Meteo free tier (non-commercial use)",
+    "fetchedAt": "2026-08-29T08:36:34.821Z",
+    "lastSuccessAt": "2026-08-29T08:36:34.821Z",
+    "ageMinutes": 0,
+    "refreshIntervalMinutes": 20,
+    "liveFields": ["airTemperature", "waterTemperature", "windSpeed", "uvIndex", "weatherCondition"],
+    "demoFields": ["ripCurrentRisk", "redTideStatus"],
+    "error": null
+  }
+}
+```
+
+The same block is returned as `meta.liveData` on `/api/beaches` and `/api/beaches/:id`. When a refresh fails, `status` becomes `stale` (cached values retained, never passed off as fresh) or `unavailable`, and `error` carries the underlying message.
 
 ### POST `/api/utility-estimate` body
 
