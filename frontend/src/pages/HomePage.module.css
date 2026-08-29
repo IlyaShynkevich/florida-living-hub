@@ -42,8 +42,6 @@
 /* min-width: 0 — grid items default to min-width:auto, and the hero image's
    intrinsic width would otherwise blow the column out past narrow viewports. */
 .heroContent { max-width: 580px; min-width: 0; }
-.heroContent .eyebrow { color: #7fd3df; margin-bottom: 1.25rem; }
-.heroContent .eyebrow::before { background: var(--coral); }
 
 .heroTitle {
   font-size: clamp(2.3rem, 5vw, 3.5rem);
@@ -105,6 +103,17 @@
   font-size: 0.82rem;
   color: rgba(255,255,255,0.7);
   margin-right: 0.25rem;
+}
+
+/* Label + three flags need ~419px; the hero column is 335px at a 375px phone.
+   Keeping the flags in their own flex row means the label takes the hit and
+   drops to its own line, rather than "Avoid" breaking off on its own. Wraps
+   internally only if the row itself cannot fit — below roughly 300px. */
+.legendFlags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 /* Hero image */
@@ -210,14 +219,14 @@
 .nodePhaseRow { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.35rem; }
 .nodePhase {
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--blue-dark);
 }
 .nodeState {
-  font-size: 0.66rem;
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -259,11 +268,16 @@
 @media (max-width: 860px) {
   .heroInner { grid-template-columns: 1fr; }
   .heroContent { max-width: none; }
-  .heroMedia { max-width: 480px; }
+  /* Once the hero stacks, a fixed 480px cap strands ~220px of empty gradient
+     beside the image at 768px. Let it track the column; .heroImage's
+     max-height still stops it dominating the fold. */
+  .heroMedia { max-width: 100%; }
 }
 @media (max-width: 620px) {
   .heroActions { flex-direction: column; align-items: stretch; }
-  .ctaPrimary, .ctaSecondary { width: 100%; }
+  .ctaPrimary, .ctaSecondary { width: 100%; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; }
   .featureGrid { grid-template-columns: 1fr; }
-  .heroCaption { left: 8px; bottom: 10px; }
+  .heroCaption { left: 8px; bottom: 10px; max-width: calc(100% - 16px); }
+  /* phase + state chips wrap rather than compressing the heading beside them */
+  .nodePhaseRow { flex-wrap: wrap; gap: 0.4rem 0.6rem; }
 }

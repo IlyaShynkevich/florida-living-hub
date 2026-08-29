@@ -53,7 +53,9 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div className={styles.heroInner}>
           <div className={styles.heroContent}>
-            <span className="eyebrow">Florida Gulf Coast · Beach-Day Planner</span>
+            {/* No eyebrow here: it repeated the navbar wordmark directly above and
+                the lead paragraph below, and cost the headline vertical space on
+                phones. Other pages keep the eyebrow — they need the section label. */}
             <h1 className={styles.heroTitle}>
               Which beach today&mdash;<span className={styles.heroTitleAccent}>and what to watch out for?</span>
             </h1>
@@ -74,9 +76,14 @@ export default function HomePage() {
             {/* Flag legend — teaches the site's signal instead of a vanity stat */}
             <div className={styles.legend}>
               <span className={styles.legendLabel}>Every beach flies a flag:</span>
-              <StatusBadge status="Go" />
-              <StatusBadge status="Caution" />
-              <StatusBadge status="Avoid" />
+              {/* The three flags are one unit. Grouping them means a narrow hero
+                  column drops the label to its own line instead of splitting
+                  "Avoid" away from the other two. */}
+              <div className={styles.legendFlags}>
+                <StatusBadge status="Go" />
+                <StatusBadge status="Caution" />
+                <StatusBadge status="Avoid" />
+              </div>
             </div>
           </div>
 

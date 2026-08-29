@@ -46,7 +46,7 @@
 }
 
 .demoTag {
-  font-size: 0.65rem;
+  font-size: 0.72rem;
   font-weight: 700;
   background: var(--sand-dark);
   color: var(--text-mid);
@@ -157,7 +157,7 @@
   margin-top: 0.25rem;
 }
 
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-bottom: 1rem; }
 
 .wrapper > section { margin-bottom: 1rem; }
 
@@ -319,4 +319,13 @@
   .recScoreBlock { flex-direction: row; align-items: baseline; }
   .recScoreNum { font-size: 2.2rem; }
   .wrapper     { padding: 0 0.1rem; }
+}
+
+@media (max-width: 760px) {
+  /* back button measured 83x35 */
+  .back { min-height: 44px; padding: 0.55rem 1.1rem; }
+  /* the provenance tags are longer now ("Live weather + demo safety data"),
+     so let the header wrap instead of squeezing the title */
+  .recHeader { flex-wrap: wrap; gap: 0.4rem 0.6rem; }
+  .demoTag { white-space: normal; }
 }
