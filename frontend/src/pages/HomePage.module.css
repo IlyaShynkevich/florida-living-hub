@@ -39,109 +39,6 @@
   gap: clamp(2rem, 5vw, 4rem);
 }
 
-/* min-width: 0 — grid items default to min-width:auto, and the hero image's
-   intrinsic width would otherwise blow the column out past narrow viewports. */
-.heroContent { max-width: 580px; min-width: 0; }
-
-.heroTitle {
-  font-size: clamp(2.3rem, 5vw, 3.5rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.04;
-  margin-bottom: 1.15rem;
-}
-.heroTitleAccent { color: #ffd8a8; font-style: italic; font-weight: 400; }
-
-.heroLead {
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
-  color: rgba(255,255,255,0.86);
-  line-height: 1.62;
-  margin-bottom: 1.85rem;
-  max-width: 30rem;
-}
-
-.heroActions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; }
-
-.ctaPrimary {
-  padding: 0.9rem 1.75rem;
-  background: var(--coral-strong);
-  color: var(--white);
-  border: none;
-  border-radius: 999px;
-  font-size: 1.02rem;
-  font-weight: 700;
-  box-shadow: 0 10px 24px rgba(199,68,43,0.42);
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-.ctaPrimary:hover {
-  background: var(--coral);
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(199,68,43,0.5);
-}
-
-.ctaSecondary {
-  padding: 0.9rem 1.5rem;
-  background: transparent;
-  color: var(--white);
-  border: 1.5px solid rgba(255,255,255,0.4);
-  border-radius: 999px;
-  font-size: 1.02rem;
-  font-weight: 600;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-.ctaSecondary:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.7); }
-
-.legend {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.16);
-}
-.legendLabel {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.7);
-  margin-right: 0.25rem;
-}
-
-/* Label + three flags need ~419px; the hero column is 335px at a 375px phone.
-   Keeping the flags in their own flex row means the label takes the hit and
-   drops to its own line, rather than "Avoid" breaking off on its own. Wraps
-   internally only if the row itself cannot fit — below roughly 300px. */
-.legendFlags {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-/* Hero image */
-.heroMedia { position: relative; min-width: 0; }
-.heroImage {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  max-height: min(480px, 60vh);
-  object-fit: cover;
-  display: block;
-  border-radius: var(--radius-lg);
-  border: 6px solid rgba(255,255,255,0.92);
-  box-shadow: 0 28px 64px rgba(4,20,38,0.45);
-}
-.heroCaption {
-  position: absolute;
-  left: -14px;
-  bottom: 22px;
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  background: var(--white);
-  padding: 0.5rem 0.85rem 0.5rem 0.55rem;
-  border-radius: 14px;
-  box-shadow: 0 14px 34px rgba(4,20,38,0.3);
-}
-.heroCaptionText { font-size: 0.85rem; font-weight: 600; color: var(--text-mid); }
-
 .heroWave {
   position: absolute;
   left: 0; right: 0; bottom: -1px;
@@ -267,31 +164,9 @@
 /* ============ Responsive ============ */
 @media (max-width: 860px) {
   .heroInner { grid-template-columns: 1fr; }
-  .heroContent { max-width: none; }
-  /* Once the hero stacks, a fixed 480px cap strands ~220px of empty gradient
-     beside the image at 768px. Let it track the column; .heroImage's
-     max-height still stops it dominating the fold. */
-  .heroMedia { max-width: 100%; }
 }
 @media (max-width: 620px) {
-  .heroActions { flex-direction: column; align-items: stretch; }
-  .ctaPrimary, .ctaSecondary { width: 100%; min-height: 52px; display: inline-flex; align-items: center; justify-content: center; }
   .featureGrid { grid-template-columns: 1fr; }
-  .heroCaption { left: 8px; bottom: 10px; max-width: calc(100% - 16px); }
   /* phase + state chips wrap rather than compressing the heading beside them */
   .nodePhaseRow { flex-wrap: wrap; gap: 0.4rem 0.6rem; }
-}
-
-/* ---- Tap feedback ---- */
-.ctaPrimary:active {
-  transform: scale(var(--tap-press));
-  background: var(--coral-strong);
-  box-shadow: 0 4px 12px rgba(199,68,43,0.42);
-  transition-duration: var(--tap-dur);
-}
-.ctaSecondary:active {
-  transform: scale(var(--tap-press));
-  background: rgba(255,255,255,0.2);
-  border-color: rgba(255,255,255,0.8);
-  transition-duration: var(--tap-dur);
 }

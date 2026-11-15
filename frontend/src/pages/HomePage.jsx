@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import FeatureCard from '../components/FeatureCard/FeatureCard'
-import StatusBadge from '../components/StatusBadge/StatusBadge'
+import HeroBeachSwitcher from '../components/HeroBeachSwitcher/HeroBeachSwitcher'
 import styles from './HomePage.module.css'
 
 const features = [
@@ -49,60 +49,10 @@ export default function HomePage() {
 
   return (
     <div className={styles.page}>
-      {/* ---------- Hero: the thesis is the product's one question ---------- */}
+      {/* ---------- Hero: live beach switcher ---------- */}
       <section className={styles.hero}>
         <div className={styles.heroInner}>
-          <div className={styles.heroContent}>
-            {/* No eyebrow here: it repeated the navbar wordmark directly above and
-                the lead paragraph below, and cost the headline vertical space on
-                phones. Other pages keep the eyebrow — they need the section label. */}
-            <h1 className={styles.heroTitle}>
-              Which beach today&mdash;<span className={styles.heroTitleAccent}>and what to watch out for?</span>
-            </h1>
-            <p className={styles.heroLead}>
-              Florida Living Hub helps locals and visitors pick the right Gulf Coast beach for
-              today, weighing weather, UV, red tide, rip-current risk, parking, and the small
-              local details that make or break a beach day.
-            </p>
-            <div className={styles.heroActions}>
-              <button className={styles.ctaPrimary} onClick={() => navigate('/beach-finder')}>
-                Find the best beach for today
-              </button>
-              <button className={styles.ctaSecondary} onClick={() => navigate('/calculator')}>
-                Estimate living costs
-              </button>
-            </div>
-
-            {/* Flag legend — teaches the site's signal instead of a vanity stat */}
-            <div className={styles.legend}>
-              <span className={styles.legendLabel}>Every beach flies a flag:</span>
-              {/* The three flags are one unit. Grouping them means a narrow hero
-                  column drops the label to its own line instead of splitting
-                  "Avoid" away from the other two. */}
-              <div className={styles.legendFlags}>
-                <StatusBadge status="Go" />
-                <StatusBadge status="Caution" />
-                <StatusBadge status="Avoid" />
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.heroMedia}>
-            {/* Hero photo (Pexels, free commercial license). Falls back to the
-                placeholder illustration if the file is ever missing. */}
-            <img
-              className={styles.heroImage}
-              src="/images/hero.jpg"
-              alt="Aerial view of turquoise Gulf of Mexico waves rolling onto a Florida shoreline"
-              width="1200"
-              height="900"
-              onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = '/images/placeholder-hero.svg' }}
-            />
-            <div className={styles.heroCaption}>
-              <StatusBadge status="Go" />
-              <span className={styles.heroCaptionText}>Siesta Key &middot; a good day to go</span>
-            </div>
-          </div>
+          <HeroBeachSwitcher />
         </div>
 
         <svg className={styles.heroWave} viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
